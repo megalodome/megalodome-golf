@@ -1,46 +1,60 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { gallery, homeIntro, site } from "@/lib/content";
+import { homeIntro, site } from "@/lib/content";
+
+export const metadata: Metadata = {
+  title: "MEGALODOME GOLF — Home",
+};
+
+const features = [
+  {
+    img: "/images/gallery/holes-9-12.jpg",
+    title: "Par 3 Holes",
+    body: "100–160 yards with undulating greens, bunkers and water hazards. Design by Huxham Golf Design Inc.",
+  },
+  {
+    img: "/images/gallery/arizona-layout.jpg",
+    title: "Par 4 Holes",
+    body: "Arizona-style layout with three par-4s at 270–280 yards — defended greens for long hitters.",
+  },
+  {
+    img: "/images/gallery/apex.jpg",
+    title: "Practice Facility",
+    body: "Fourth dome: 50 stalls over 275+ yards, short-game areas, bunkers, and simulator stations.",
+  },
+];
 
 export default function HomePage() {
   return (
     <>
-      <section className="relative overflow-hidden">
-        <div className="absolute inset-0">
-          <Image
-            src="/images/hero-dome.jpg"
-            alt="MEGALODOME GOLF domes"
-            fill
-            priority
-            className="object-cover opacity-45"
-          />
-          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(7,20,15,.92),rgba(7,20,15,.55),rgba(7,20,15,.88))]" />
-        </div>
-        <div className="container relative py-20 md:py-28">
-          <div className="eyebrow mb-4">Oswego, IL flagship</div>
-          <h1 className="display max-w-4xl text-5xl leading-[1.05] md:text-7xl">
-            {site.name}
-            <span className="mt-3 block text-[var(--gold)]">{site.tagline}</span>
+      <section className="home-hero">
+        <div
+          className="home-hero-bg"
+          style={{ backgroundImage: "url('/images/hero-dome.jpg')" }}
+        />
+        <div className="home-hero-overlay" />
+        <div className="home-hero-content">
+          <span className="home-hero-eyebrow">Welcome to</span>
+          <h1>
+            MEGALODOME
+            <br />
+            GOLF
           </h1>
-          <p className="mt-6 max-w-2xl text-xl text-white/90">{site.blurb}</p>
-          <div className="mt-8 flex flex-wrap gap-3">
+          <p className="home-hero-sub">&quot;THE NEXT REVOLUTION&quot;™</p>
+          <p className="home-hero-tagline">
+            The World&apos;s First REAL Indoor Golf Experience
+          </p>
+          <div className="mt-6 flex flex-wrap justify-center gap-3">
             <Link href="/our-location" className="btn btn-primary">
-              Explore the location
+              Discover More
             </Link>
-            <Link href="/invest" className="btn btn-primary">
+            <Link href="/invest" className="btn btn-secondary">
               Investors
             </Link>
             <Link href="/contact" className="btn btn-secondary">
               Contact
             </Link>
-            <a
-              href={site.flyerPath}
-              className="btn btn-secondary"
-              target="_blank"
-              rel="noreferrer"
-            >
-              2026 Flyer PDF
-            </a>
           </div>
         </div>
       </section>
@@ -48,13 +62,14 @@ export default function HomePage() {
       <section className="section">
         <div className="container grid items-center gap-10 lg:grid-cols-2">
           <div>
-            <div className="eyebrow mb-3">The experience</div>
-            <h2 className="display text-3xl md:text-4xl">{homeIntro.title}</h2>
-            <p className="muted mt-4 text-lg">{homeIntro.body}</p>
-            <ul className="mt-6 space-y-3">
+            <p className="section-label mb-3">Introduction</p>
+            <h2 className="display text-4xl md:text-5xl">{homeIntro.title}</h2>
+            <div className="divider" />
+            <p className="muted text-base leading-8">{homeIntro.body}</p>
+            <ul className="mt-5 space-y-2">
               {homeIntro.bullets.map((b) => (
-                <li key={b} className="flex gap-3">
-                  <span className="mt-1 h-2.5 w-2.5 shrink-0 rounded-full bg-[var(--gold)]" />
+                <li key={b} className="flex gap-3 text-[var(--text)]">
+                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--gold)]" />
                   <span>{b}</span>
                 </li>
               ))}
@@ -62,11 +77,12 @@ export default function HomePage() {
           </div>
           <div className="card">
             <Image
-              src="/images/arizona-layout.jpg"
-              alt="Arizona layout"
+              src="/images/gallery/three-domes-summer.jpg"
+              alt="Dome exterior"
               width={1200}
-              height={800}
+              height={900}
               className="h-auto w-full object-cover"
+              priority
             />
           </div>
         </div>
@@ -74,49 +90,89 @@ export default function HomePage() {
 
       <section className="section pt-0">
         <div className="container">
-          <div className="mb-6 flex items-end justify-between gap-4">
-            <div>
-              <div className="eyebrow mb-2">Gallery</div>
-              <h2 className="display text-3xl">A new era of indoor golf</h2>
+          <div className="specs-row">
+            <div className="spec-item">
+              <div className="spec-number">9</div>
+              <div className="spec-label">Executive Holes — Par 30</div>
             </div>
-            <Link href="/pictures" className="btn btn-secondary">
-              View all
-            </Link>
+            <div className="spec-item">
+              <div className="spec-number">4</div>
+              <div className="spec-label">Proprietary Domes</div>
+            </div>
+            <div className="spec-item">
+              <div className="spec-number">275</div>
+              <div className="spec-label">Yards — Practice Range</div>
+            </div>
           </div>
+        </div>
+      </section>
+
+      <section className="section pt-0">
+        <div className="container">
+          <p className="section-label mb-2 text-center">The Course</p>
+          <h2 className="display mb-8 text-center text-4xl">What Awaits You</h2>
           <div className="grid-3">
-            {gallery.slice(0, 3).map((img) => (
-              <div key={img.src} className="card">
+            {features.map((f) => (
+              <article key={f.title} className="card">
                 <Image
-                  src={img.src}
-                  alt={img.alt}
-                  width={900}
-                  height={700}
-                  className="h-56 w-full object-cover"
+                  src={f.img}
+                  alt={f.title}
+                  width={800}
+                  height={560}
+                  className="h-52 w-full object-cover"
                 />
-              </div>
+                <div className="p-5">
+                  <h3 className="display text-2xl text-[var(--gold)]">{f.title}</h3>
+                  <p className="muted mt-2 text-sm leading-7">{f.body}</p>
+                </div>
+              </article>
             ))}
           </div>
         </div>
       </section>
 
       <section className="section pt-0">
+        <div className="container max-w-4xl">
+          <p className="section-label mb-2 text-center">See It in Action</p>
+          <h2 className="display mb-2 text-center text-4xl">Watch Our Video</h2>
+          <p className="mb-6 text-center italic text-[var(--text-muted)]">
+            MEGALODOME GOLF &quot;THE NEXT REVOLUTION&quot;™
+          </p>
+          <div className="video-wrap">
+            <video
+              controls
+              preload="metadata"
+              poster="/images/hero-dome.jpg"
+              playsInline
+            >
+              <source src="/video/megalodome-intro.mp4" type="video/mp4" />
+            </video>
+          </div>
+        </div>
+      </section>
+
+      <section className="section pt-0">
         <div className="container card p-8 md:p-12">
-          <div className="grid gap-6 md:grid-cols-[1.4fr_1fr] md:items-center">
+          <div className="grid gap-6 md:grid-cols-[1.3fr_1fr] md:items-center">
             <div>
-              <div className="eyebrow mb-2">Target opening</div>
-              <h2 className="display text-3xl md:text-4xl">{site.openTarget}</h2>
-              <p className="muted mt-3 text-lg">
-                Climate-controlled Arizona vibes in {site.location}. Planned
-                hours: {site.hours}.
+              <p className="section-label mb-2">Investment Opportunity</p>
+              <h2 className="display text-3xl md:text-4xl">
+                Investor Information
+              </h2>
+              <div className="divider" />
+              <p className="muted text-lg leading-8">
+                MEGALODOME GOLF Equity Fund I — Chicago West flagship. Explore the
+                opportunity, data room tiers, and inquiry path for accredited
+                investors.
               </p>
             </div>
             <div className="flex flex-wrap gap-3 md:justify-end">
-              <Link href="/faq" className="btn btn-secondary">
-                Read FAQ
+              <Link href="/invest" className="btn btn-primary">
+                Investor Portal
               </Link>
-              <Link href="/contact" className="btn btn-primary">
-                Contact the team
-              </Link>
+              <a href={site.flyerPath} className="btn btn-secondary" target="_blank" rel="noreferrer">
+                2026 Flyer
+              </a>
             </div>
           </div>
         </div>

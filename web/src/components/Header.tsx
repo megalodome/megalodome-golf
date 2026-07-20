@@ -11,36 +11,30 @@ export function Header() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-[var(--line)]/80 bg-[#07140f]/90 backdrop-blur-md">
-      <div className="container flex items-center justify-between gap-4 py-3">
+    <header className="sticky top-0 z-50 border-b border-[rgba(238,220,167,0.15)] bg-[rgba(10,10,10,0.92)] backdrop-blur-md">
+      <div className="container flex h-20 items-center justify-between gap-4">
         <Link href="/" className="flex items-center gap-3">
           <Image
-            src="/images/logo.png"
+            src="/images/brand/logo-white.png"
             alt={site.name}
-            width={48}
+            width={160}
             height={48}
-            className="h-12 w-12 object-contain"
+            className="h-10 w-auto object-contain"
             priority
           />
-          <div>
-            <div className="display text-lg leading-none tracking-wide">
-              {site.name}
-            </div>
-            <div className="text-xs text-[var(--gold)]">{site.tagline}</div>
-          </div>
         </Link>
 
-        <nav className="hidden items-center gap-1 lg:flex">
+        <nav className="hidden items-center lg:flex">
           {nav.map((item) => {
-            const active = pathname === item.href;
+            const active =
+              pathname === item.href ||
+              (item.href !== "/" && pathname.startsWith(item.href));
             return (
               <Link
                 key={item.href}
                 href={item.href}
-                className={`rounded-full px-3 py-2 text-sm transition ${
-                  active
-                    ? "bg-[rgba(198,167,94,0.14)] text-[var(--gold-soft)]"
-                    : "text-[var(--muted)] hover:text-white"
+                className={`px-2.5 py-2 text-[0.68rem] font-semibold uppercase tracking-[0.12em] transition ${
+                  active ? "text-[var(--gold)]" : "text-[var(--text)] hover:text-[var(--gold)]"
                 }`}
               >
                 {item.label}
@@ -50,8 +44,8 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <Link href="/contact" className="btn btn-primary hidden sm:inline-flex">
-            Contact
+          <Link href="/invest" className="btn btn-primary hidden sm:inline-flex">
+            Investors
           </Link>
           <button
             type="button"
@@ -65,13 +59,13 @@ export function Header() {
       </div>
 
       {open && (
-        <div className="border-t border-[var(--line)] bg-[#0a1a13] lg:hidden">
-          <div className="container flex flex-col gap-1 py-3">
+        <div className="border-t border-[rgba(238,220,167,0.12)] bg-[rgba(10,10,10,0.98)] lg:hidden">
+          <div className="container flex flex-col py-3">
             {nav.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="rounded-lg px-3 py-2 text-[var(--muted)] hover:bg-white/5 hover:text-white"
+                className="border-b border-[rgba(238,220,167,0.08)] py-3 text-xs font-semibold uppercase tracking-[0.12em] text-[var(--text)]"
                 onClick={() => setOpen(false)}
               >
                 {item.label}

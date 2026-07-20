@@ -19,3 +19,6 @@ web/.vercel/
 
 supabase/.temp/
 reports/twilio_account.json
+
+incoming/
+*.zip
