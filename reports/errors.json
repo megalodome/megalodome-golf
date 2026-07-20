@@ -1,0 +1,14 @@
+[
+  {
+    "url": "https://img1.wsimg.com/isteam/ip/b89c831d-763f-4292-8d16-62c8e624142a/Image%20dome%20Summer%20and%20winter%201.jpg",
+    "error": "[Errno 13] Permission denied: 'C:\\\\Projects\\\\websites\\\\megalodome\\\\backup\\\\assets\\\\img1.wsimg.com\\\\isteam\\\\ip\\\\b89c831d-763f-4292-8d16-62c8e624142a\\\\Image_20dome_20Summer_20and_20winter_201.jpg'"
+  },
+  {
+    "url": "https://megalodomegolf.com/fonts/uxfont.ttf",
+    "error": "HTTPSConnectionPool(host='megalodomegolf.com', port=443): Read timed out. (read timeout=45)"
+  },
+  {
+    "url": "https://megalodomegolf.com/m/cr=w:600",
+    "error": "HTTPSConnectionPool(host='megalodomegolf.com', port=443): Read timed out. (read timeout=45)"
+  }
+]
