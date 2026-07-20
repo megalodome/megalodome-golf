@@ -1,0 +1,110 @@
+[
+  {
+    "file": "Megalodome_Abbreviations_Key.docx",
+    "tier": "tier1",
+    "web_render": true,
+    "download_public": false,
+    "title": "Abbreviations & Terms Key",
+    "chars": 3760,
+    "extract": "C:\\Projects\\dizzat\\megalodome\\investor-docs\\extracted\\Megalodome_Abbreviations_Key.md"
+  },
+  {
+    "file": "Megalodome_Data_Room_Index.docx",
+    "tier": "internal",
+    "web_render": false,
+    "download_public": false,
+    "title": "Data Room Index tracker",
+    "chars": 3497,
+    "extract": "C:\\Projects\\dizzat\\megalodome\\investor-docs\\extracted\\Megalodome_Data_Room_Index.md"
+  },
+  {
+    "file": "Megalodome_Executive_Summary.docx",
+    "tier": "tier1",
+    "web_render": true,
+    "download_public": false,
+    "title": "Executive Summary",
+    "chars": 7789,
+    "extract": "C:\\Projects\\dizzat\\megalodome\\investor-docs\\extracted\\Megalodome_Executive_Summary.md"
+  },
+  {
+    "file": "Megalodome_Investor_Engagement_Playbook.docx",
+    "tier": "internal",
+    "web_render": false,
+    "download_public": false,
+    "title": "Internal engagement playbook",
+    "chars": 13445,
+    "extract": "C:\\Projects\\dizzat\\megalodome\\investor-docs\\extracted\\Megalodome_Investor_Engagement_Playbook.md"
+  },
+  {
+    "file": "Megalodome_Investor_FAQ.docx",
+    "tier": "tier1",
+    "web_render": true,
+    "download_public": false,
+    "title": "Investor FAQ",
+    "chars": 6454,
+    "extract": "C:\\Projects\\dizzat\\megalodome\\investor-docs\\extracted\\Megalodome_Investor_FAQ.md"
+  },
+  {
+    "file": "Megalodome_Investor_ProForma.xlsx",
+    "tier": "tier2",
+    "web_render": false,
+    "download_public": false,
+    "title": "Full Investor Pro-Forma model",
+    "chars": 14763,
+    "extract": "C:\\Projects\\dizzat\\megalodome\\investor-docs\\extracted\\Megalodome_Investor_ProForma.md"
+  },
+  {
+    "file": "Megalodome_Investor_Roadmap.docx",
+    "tier": "tier1",
+    "web_render": true,
+    "download_public": false,
+    "title": "Investor Roadmap",
+    "chars": 3320,
+    "extract": "C:\\Projects\\dizzat\\megalodome\\investor-docs\\extracted\\Megalodome_Investor_Roadmap.md"
+  },
+  {
+    "file": "Megalodome_Mutual_NDA.docx",
+    "tier": "tier2",
+    "web_render": false,
+    "download_public": false,
+    "title": "Mutual NDA template",
+    "chars": 5673,
+    "extract": "C:\\Projects\\dizzat\\megalodome\\investor-docs\\extracted\\Megalodome_Mutual_NDA.md"
+  },
+  {
+    "file": "Megalodome_One-Pager.docx",
+    "tier": "tier0",
+    "web_render": true,
+    "download_public": true,
+    "title": "Teaser one-pager",
+    "chars": 2946,
+    "extract": "C:\\Projects\\dizzat\\megalodome\\investor-docs\\extracted\\Megalodome_One-Pager.md"
+  },
+  {
+    "file": "Megalodome_Pitch_Deck.pptx",
+    "tier": "tier0",
+    "web_render": true,
+    "download_public": true,
+    "title": "Pitch deck (marketing)",
+    "chars": 11318,
+    "extract": "C:\\Projects\\dizzat\\megalodome\\investor-docs\\extracted\\Megalodome_Pitch_Deck.md"
+  },
+  {
+    "file": "Megalodome_ProForma_Summary.docx",
+    "tier": "tier1",
+    "web_render": true,
+    "download_public": false,
+    "title": "Pro-Forma Summary",
+    "chars": 1533,
+    "extract": "C:\\Projects\\dizzat\\megalodome\\investor-docs\\extracted\\Megalodome_ProForma_Summary.md"
+  },
+  {
+    "file": "Megalodome_Target_Asset_Preview.docx",
+    "tier": "tier2",
+    "web_render": false,
+    "download_public": false,
+    "title": "Target Asset Preview",
+    "chars": 5182,
+    "extract": "C:\\Projects\\dizzat\\megalodome\\investor-docs\\extracted\\Megalodome_Target_Asset_Preview.md"
+  }
+]
