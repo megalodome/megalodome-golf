@@ -1,0 +1,123 @@
+{
+  "zone": {
+    "id": "d758c505b338ccb4df64635c9e4afcd0",
+    "name": "megalodomegolf.com",
+    "status": "active",
+    "account": "Webadmin@megalodomegolf.com's Account",
+    "account_id": "9171fd55f0f23befc856c840ad941c5f"
+  },
+  "records": [
+    {
+      "type": "A",
+      "name": "megalodomegolf.com",
+      "content": "13.248.243.5",
+      "proxied": true,
+      "ttl": 1
+    },
+    {
+      "type": "A",
+      "name": "megalodomegolf.com",
+      "content": "76.223.105.230",
+      "proxied": true,
+      "ttl": 1
+    },
+    {
+      "type": "CNAME",
+      "name": "autodiscover.megalodomegolf.com",
+      "content": "autodiscover.outlook.com",
+      "proxied": true,
+      "ttl": 1
+    },
+    {
+      "type": "CNAME",
+      "name": "_domainconnect.megalodomegolf.com",
+      "content": "_domainconnect.gd.domaincontrol.com",
+      "proxied": true,
+      "ttl": 1
+    },
+    {
+      "type": "CNAME",
+      "name": "enterpriseenrollment.megalodomegolf.com",
+      "content": "enterpriseenrollment.manage.microsoft.com",
+      "proxied": true,
+      "ttl": 1
+    },
+    {
+      "type": "CNAME",
+      "name": "enterpriseregistration.megalodomegolf.com",
+      "content": "enterpriseregistration.windows.net",
+      "proxied": true,
+      "ttl": 1
+    },
+    {
+      "type": "CNAME",
+      "name": "link.megalodomegolf.com",
+      "content": "brand.ludicrous.cloud",
+      "proxied": true,
+      "ttl": 1
+    },
+    {
+      "type": "CNAME",
+      "name": "lyncdiscover.megalodomegolf.com",
+      "content": "webdir.online.lync.com",
+      "proxied": true,
+      "ttl": 1
+    },
+    {
+      "type": "CNAME",
+      "name": "sip.megalodomegolf.com",
+      "content": "sipdir.online.lync.com",
+      "proxied": true,
+      "ttl": 1
+    },
+    {
+      "type": "CNAME",
+      "name": "www.megalodomegolf.com",
+      "content": "megalodomegolf.com",
+      "proxied": true,
+      "ttl": 1
+    },
+    {
+      "type": "MX",
+      "name": "megalodomegolf.com",
+      "content": "megalodomegolf-com.mail.protection.outlook.com",
+      "proxied": false,
+      "ttl": 1
+    },
+    {
+      "type": "SRV",
+      "name": "_sipfederationtls._tcp.megalodomegolf.com",
+      "content": "1 5061 sipfed.online.lync.com",
+      "proxied": false,
+      "ttl": 1
+    },
+    {
+      "type": "SRV",
+      "name": "_sip._tls.megalodomegolf.com",
+      "content": "1 443 sipdir.online.lync.com",
+      "proxied": false,
+      "ttl": 1
+    },
+    {
+      "type": "TXT",
+      "name": "_dmarc.megalodomegolf.com",
+      "content": "\"v=DMARC1; p=none; rua=mailto:dmarc_rua@onsecureserver.net\"",
+      "proxied": false,
+      "ttl": 1
+    },
+    {
+      "type": "TXT",
+      "name": "megalodomegolf.com",
+      "content": "\"v=verifydomain MS=5679422\"",
+      "proxied": false,
+      "ttl": 1
+    },
+    {
+      "type": "TXT",
+      "name": "megalodomegolf.com",
+      "content": "\"v=spf1 include:spf.em.secureserver.net include:spf.protection.outlook.com -all\"",
+      "proxied": false,
+      "ttl": 1
+    }
+  ]
+}

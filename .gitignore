@@ -7,3 +7,15 @@ node_modules/
 dist/
 .vercel/
 *.log
+reports/crawl.log
+
+.vercel
+.env*
+.env.local
+web/node_modules/
+web/.next/
+web/.env.local
+web/.vercel/
+
+supabase/.temp/
+reports/twilio_account.json

@@ -1,13 +1,20 @@
 # Megalodome Golf
 
-Project root: `C:\Projects\dizzat\megalodome`
+Modern rebuild of https://megalodomegolf.com
 
-## Layout
-- `backup/` — full crawl of https://megalodomegolf.com (pages, text, images, docs)
-- `reports/` — backup inventories and link maps
-- `scripts/` — crawl/backup scripts
-- `web/` — (to be created) new Next.js app
-- `TOKENS.txt` — local secrets placeholder (do not commit)
+## Paths
+- `web/` — Next.js App Router site
+- `backup/` — crawl archive of legacy GoDaddy site
+- `supabase/` — SQL migrations
+- `reports/` — crawl inventories
 
-## Live source backup
-Captured from GoDaddy site megalodomegolf.com for rebuild on new GitHub/Vercel/Supabase/Cloudflare stack.
+## Local
+```bash
+cd web
+cp ../.env.local .env.local   # if needed
+npm install
+npm run dev
+```
+
+## Deploy
+Vercel project `megalodome-golf`, Root Directory = `web`.

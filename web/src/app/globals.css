@@ -1,0 +1,140 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #07140f;
+  --bg-soft: #0d1f18;
+  --card: #12281f;
+  --line: #1f3d30;
+  --text: #f3f7f4;
+  --muted: #a8c0b4;
+  --gold: #c6a75e;
+  --gold-soft: #e6d3a1;
+  --green: #1f8f5f;
+  --green-bright: #2fbf7a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background:
+    radial-gradient(circle at top, rgba(47, 191, 122, 0.12), transparent 35%),
+    linear-gradient(180deg, #07140f 0%, #0a1a13 40%, #07140f 100%);
+  color: var(--text);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  min-height: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.container {
+  width: min(1120px, calc(100% - 2rem));
+  margin-inline: auto;
+}
+
+.display {
+  font-family: var(--font-display), Georgia, serif;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 999px;
+  padding: 0.85rem 1.35rem;
+  font-weight: 600;
+  transition: 0.2s ease;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--gold), #a8883d);
+  color: #14110a;
+}
+
+.btn-primary:hover {
+  filter: brightness(1.05);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  border: 1px solid rgba(198, 167, 94, 0.45);
+  color: var(--gold-soft);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.btn-secondary:hover {
+  border-color: var(--gold);
+  background: rgba(198, 167, 94, 0.08);
+}
+
+.card {
+  background: linear-gradient(180deg, rgba(18, 40, 31, 0.95), rgba(10, 24, 18, 0.95));
+  border: 1px solid var(--line);
+  border-radius: 1.25rem;
+  overflow: hidden;
+}
+
+.section {
+  padding: 4.5rem 0;
+}
+
+.eyebrow {
+  color: var(--gold);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.input,
+.textarea {
+  width: 100%;
+  border-radius: 0.9rem;
+  border: 1px solid var(--line);
+  background: rgba(7, 20, 15, 0.7);
+  color: var(--text);
+  padding: 0.9rem 1rem;
+  outline: none;
+}
+
+.input:focus,
+.textarea:focus {
+  border-color: rgba(198, 167, 94, 0.7);
+  box-shadow: 0 0 0 3px rgba(198, 167, 94, 0.12);
+}
+
+.textarea {
+  min-height: 140px;
+  resize: vertical;
+}
+
+.grid-3 {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.grid-2 {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (max-width: 900px) {
+  .grid-3,
+  .grid-2 {
+    grid-template-columns: 1fr;
+  }
+}
