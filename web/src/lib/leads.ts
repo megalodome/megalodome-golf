@@ -141,7 +141,7 @@ export function investorPackEmailHtml(opts: {
     );
   }
   return `
-  <div style="font-family:Georgia,serif;line-height:1.5;color:#12281f">
+  <div style="font-family:Georgia,serif;line-height:1.5;color:#f0e8d0;background:#0a0a0a;padding:16px">
     <p>Dear ${opts.name},</p>
     <p>Thank you for your interest in <strong>MEGALODOME GOLF Equity Fund I</strong> (Chicago West flagship).</p>
     <p>Your materials are attached and also available here:</p>

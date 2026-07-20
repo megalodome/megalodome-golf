@@ -29,7 +29,7 @@ export default function LocationPage() {
             <ul className="mt-5 space-y-4">
               {locationFeatures.map((f) => (
                 <li key={f} className="flex gap-3">
-                  <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-[var(--green-bright)]" />
+                  <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-[var(--gold)]" />
                   <span className="muted leading-7">{f}</span>
                 </li>
               ))}

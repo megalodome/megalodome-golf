@@ -114,7 +114,7 @@ export function ContactForm() {
         {message ? (
           <p
             className={
-              status === "ok" ? "text-[var(--green-bright)]" : "text-red-300"
+              status === "ok" ? "text-[var(--gold-light)]" : "text-red-300"
             }
           >
             {message}

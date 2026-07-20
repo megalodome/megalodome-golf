@@ -21,8 +21,7 @@
   --card: var(--dark2);
   --muted: var(--text-muted);
   --gold-soft: var(--gold-light);
-  --green: #1f8f5f;
-  --green-bright: #2fbf7a;
+  --success: var(--gold-light);
 }
 
 * { box-sizing: border-box; }

@@ -3,7 +3,7 @@ import { site } from "@/lib/content";
 
 export function Footer() {
   return (
-    <footer className="mt-10 border-t border-[var(--line)] bg-[#06110d]">
+    <footer className="mt-10 border-t border-[rgba(238,220,167,0.15)] bg-[#0a0a0a]">
       <div className="container grid gap-8 py-10 md:grid-cols-[1.4fr_1fr_1fr]">
         <div>
           <div className="display text-2xl">{site.name}</div>

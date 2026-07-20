@@ -3,7 +3,7 @@ import { investorNav } from "@/lib/investor";
 
 export function InvestorSubnav({ current }: { current?: string }) {
   return (
-    <div className="border-b border-[var(--line)] bg-[#0a1a13]/80">
+    <div className="border-b border-[rgba(238,220,167,0.15)] bg-[rgba(10,10,10,0.96)] backdrop-blur-md">
       <div className="container flex flex-wrap gap-2 py-3">
         {investorNav.map((item) => {
           const active = current === item.href;
