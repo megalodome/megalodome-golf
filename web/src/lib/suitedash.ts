@@ -26,6 +26,79 @@ export type SuiteDashContact = {
   companies?: Array<{ uid?: string; name?: string }>;
 };
 
+/** Recommended CRM taxonomy for MEGALODOME investor funnel */
+export const SUITEDASH_RECOMMENDED = {
+  circles: {
+    investors: "Investors",
+    websiteLeads: "Website Leads",
+    media: "Media",
+    partners: "Partners",
+  },
+  pipeline: "Investor Raise",
+  dealGenerator: "Website Investor Lead",
+  stages: [
+    "New Inquiry",
+    "Info Pack Sent",
+    "Call Booked",
+    "Diligence",
+    "Soft Circle",
+    "Commitment",
+    "Won",
+    "Lost",
+  ] as const,
+  baseTags: [
+    "investor",
+    "website",
+    "source:megalodomegolf.com",
+    "pipeline:investor-raise",
+    "stage:new-inquiry",
+    "fund:equity-fund-i",
+    "geo:chicago-west",
+  ],
+} as const;
+
+export function buildRecommendedInvestorTags(opts: {
+  heat?: "hot" | "warm" | "cold";
+  investorType?: string;
+  requestTier1?: boolean;
+  requestNda?: boolean;
+  utmSource?: string;
+  extra?: string[];
+}): string[] {
+  const tags = new Set<string>(SUITEDASH_RECOMMENDED.baseTags);
+  if (opts.heat) tags.add(`score:${opts.heat}`);
+  if (opts.investorType) {
+    tags.add(`type:${opts.investorType.toLowerCase().replace(/\s+/g, "-")}`);
+  }
+  tags.add(opts.requestTier1 ? "pack:tier1" : "pack:tier0");
+  if (opts.requestTier1) tags.add("stage:info-pack-sent");
+  if (opts.requestNda) {
+    tags.add("nda-requested");
+    tags.add("stage:diligence-pending-nda");
+  }
+  if (opts.utmSource) tags.add(`utm:${opts.utmSource}`);
+  for (const t of opts.extra || []) {
+    if (t) tags.add(t);
+  }
+  return Array.from(tags);
+}
+
+export function investorCrmPlaybookNote(extra?: string): string {
+  return [
+    "---",
+    "CRM PLAYBOOK",
+    `Pipeline: ${SUITEDASH_RECOMMENDED.pipeline}`,
+    `Stages: ${SUITEDASH_RECOMMENDED.stages.join(" → ")}`,
+    `Deal Generator: ${SUITEDASH_RECOMMENDED.dealGenerator} (configure in SuiteDash UI)`,
+    `Circles: ${SUITEDASH_RECOMMENDED.circles.investors}, ${SUITEDASH_RECOMMENDED.circles.websiteLeads}`,
+    "SLA: personal touch within 24h if score:hot",
+    "Website auto-sends Tier 0/1 pack (+ NDA if requested)",
+    extra || "",
+  ]
+    .filter(Boolean)
+    .join("\n");
+}
+
 function baseUrl() {
   return (
     process.env.SUITEDASH_BASE_URL ||
@@ -70,8 +143,10 @@ async function suitedashFetch<T = unknown>(
   return json as T;
 }
 
-/** Split a full name into first/last. */
-export function splitName(fullName: string): { firstName: string; lastName: string } {
+export function splitName(fullName: string): {
+  firstName: string;
+  lastName: string;
+} {
   const parts = fullName.trim().split(/\s+/).filter(Boolean);
   if (parts.length === 0) return { firstName: "Investor", lastName: "" };
   if (parts.length === 1) return { firstName: parts[0], lastName: "" };
@@ -82,8 +157,8 @@ export function splitName(fullName: string): { firstName: string; lastName: stri
 }
 
 /**
- * Create (or attempt create) a CRM Lead/Prospect/Client in SuiteDash.
- * Deals are NOT available via Secure API — configure Deal Generator automation in SuiteDash UI
+ * Create a CRM Lead/Prospect/Client in SuiteDash.
+ * Deals are NOT available via Secure API — configure Deal Generator automation in UI
  * to fire on tag `investor` / circle Investors.
  */
 export async function createSuiteDashContact(
@@ -126,6 +201,45 @@ export async function createSuiteDashContact(
   return json.data;
 }
 
+/** Update existing contact by UID (recommended tags / circles / notes). */
+export async function updateSuiteDashContact(
+  uid: string,
+  input: Partial<CreateLeadInput> & { email: string; firstName: string }
+): Promise<SuiteDashContact> {
+  const payload: Record<string, unknown> = {
+    first_name: input.firstName,
+    last_name: input.lastName || "",
+    email: input.email,
+    role: input.role || "Lead",
+  };
+  if (input.phone) payload.phone = input.phone;
+  if (input.title) payload.title = input.title;
+  if (input.website) payload.website = input.website;
+  if (input.backgroundInfo) payload.background_info = input.backgroundInfo;
+  if (input.tags?.length) payload.tags = input.tags;
+  if (input.circlesToAdd?.length) {
+    payload.circles = { add: input.circlesToAdd };
+  }
+  if (input.customFields && Object.keys(input.customFields).length) {
+    payload.custom_fields = input.customFields;
+  }
+  if (input.company?.trim()) {
+    payload.company = {
+      name: input.company.trim(),
+      create_company_if_not_exists: true,
+    };
+  }
+
+  const json = await suitedashFetch<{ data: SuiteDashContact }>(
+    `/contact/${uid}`,
+    {
+      method: "PUT",
+      body: JSON.stringify(payload),
+    }
+  );
+  return json.data;
+}
+
 export function buildInvestorBackground(fields: {
   message?: string;
   investorType?: string;
@@ -134,6 +248,9 @@ export function buildInvestorBackground(fields: {
   accredited?: string;
   source?: string;
   page?: string;
+  heat?: string;
+  requestTier1?: boolean;
+  requestNda?: boolean;
 }): string {
   return [
     "=== MEGALODOME INVESTOR LEAD ===",
@@ -143,8 +260,13 @@ export function buildInvestorBackground(fields: {
     `Check size: ${fields.checkSize || "—"}`,
     `Timeline: ${fields.timeline || "—"}`,
     `Accredited: ${fields.accredited || "—"}`,
+    `Score: ${fields.heat || "—"}`,
+    `Tier1 pack: ${fields.requestTier1 ? "yes" : "no"}`,
+    `NDA requested: ${fields.requestNda ? "yes" : "no"}`,
     "",
     fields.message || "",
+    "",
+    investorCrmPlaybookNote(),
   ]
     .join("\n")
     .trim();

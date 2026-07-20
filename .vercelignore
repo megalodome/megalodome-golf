@@ -1,0 +1,12 @@
+incoming
+backup
+reports
+investor-docs/originals
+investor-docs/tier0-public
+investor-docs/tier1-premeeting
+investor-docs/tier2-dataroom
+investor-docs/internal
+investor-docs/extracted
+*.zip
+node_modules
+.git

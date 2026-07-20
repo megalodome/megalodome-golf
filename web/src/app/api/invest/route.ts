@@ -10,7 +10,9 @@ import {
 } from "@/lib/leads";
 import {
   SUITEDASH_CUSTOM_FIELDS,
+  SUITEDASH_RECOMMENDED,
   buildInvestorBackground,
+  buildRecommendedInvestorTags,
   createSuiteDashContact,
   splitName,
 } from "@/lib/suitedash";
@@ -107,20 +109,18 @@ export async function POST(req: Request) {
       accredited,
       source: sourceSite,
       page: "/invest/apply",
+      heat,
+      requestTier1,
+      requestNda,
     });
 
-    const tags = [
-      "investor",
-      "website",
-      "source:megalodomegolf.com",
-      `score:${heat}`,
-      investorType
-        ? `type:${investorType.toLowerCase().replace(/\s+/g, "-")}`
-        : "",
-      requestTier1 ? "pack:tier1" : "pack:tier0",
-      requestNda ? "nda-requested" : "",
-      body.utm_source ? `utm:${body.utm_source}` : "",
-    ].filter(Boolean);
+    const tags = buildRecommendedInvestorTags({
+      heat,
+      investorType,
+      requestTier1,
+      requestNda,
+      utmSource: body.utm_source,
+    });
 
     // 1) SuiteDash
     let suitedashUid: string | null = null;
@@ -141,6 +141,9 @@ export async function POST(req: Request) {
         `Score: ${heat}`,
         `Tier1 pack: ${requestTier1 ? "yes" : "no"}`,
         `NDA requested: ${requestNda ? "yes" : "no"}`,
+        `Pipeline: ${SUITEDASH_RECOMMENDED.pipeline}`,
+        `Target stage: ${requestNda ? "Diligence (pending NDA)" : requestTier1 ? "Info Pack Sent" : "New Inquiry"}`,
+        `Deal generator: ${SUITEDASH_RECOMMENDED.dealGenerator}`,
         `UTM: ${body.utm_source || ""}/${body.utm_medium || ""}/${body.utm_campaign || ""}`,
         "",
         message,
@@ -157,7 +160,10 @@ export async function POST(req: Request) {
         backgroundInfo: background,
         role: "Lead",
         tags,
-        circlesToAdd: ["Investors"],
+        circlesToAdd: [
+          SUITEDASH_RECOMMENDED.circles.investors,
+          SUITEDASH_RECOMMENDED.circles.websiteLeads,
+        ],
         customFields,
         sendWelcomeEmail: false,
       });

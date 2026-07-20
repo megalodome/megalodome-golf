@@ -1,0 +1,74 @@
+[
+  {
+    "uid": "71b7e897-1038-4bf5-9686-756226285550",
+    "email": "crm.setup+megalodome@example.com",
+    "code": 200,
+    "ok": true,
+    "tags": [
+      "investor",
+      "internal",
+      "crm-setup",
+      "pipeline:investor-raise",
+      "do-not-contact",
+      "website",
+      "source:megalodomegolf.com",
+      "stage:new-inquiry",
+      "fund:equity-fund-i",
+      "geo:chicago-west"
+    ]
+  },
+  {
+    "uid": "14481971-077b-4272-afeb-6c9c540c79e2",
+    "email": "pack.delivery.test+megalodome@example.com",
+    "code": 200,
+    "ok": true,
+    "tags": [
+      "investor",
+      "website",
+      "source:megalodomegolf.com",
+      "score:hot",
+      "type:fund",
+      "pack:tier1",
+      "nda-requested",
+      "utm:e2e",
+      "pipeline:investor-raise",
+      "stage:new-inquiry",
+      "fund:equity-fund-i",
+      "geo:chicago-west",
+      "stage:info-pack-sent",
+      "stage:diligence-pending-nda"
+    ]
+  },
+  {
+    "uid": "21483368-b2a6-43a2-b845-06d870e145b3",
+    "email": "site.investor.test+megalodome@example.com",
+    "code": 200,
+    "ok": true,
+    "tags": [
+      "investor",
+      "website",
+      "source:megalodomegolf.com",
+      "type:family-office",
+      "pipeline:investor-raise",
+      "stage:new-inquiry",
+      "fund:equity-fund-i",
+      "geo:chicago-west"
+    ]
+  },
+  {
+    "uid": "713680c3-2386-444c-9694-366bd5510bbd",
+    "email": "hermes.api.test+megalodome@example.com",
+    "code": 200,
+    "ok": true,
+    "tags": [
+      "investor",
+      "website",
+      "api-test",
+      "source:megalodomegolf.com",
+      "pipeline:investor-raise",
+      "stage:new-inquiry",
+      "fund:equity-fund-i",
+      "geo:chicago-west"
+    ]
+  }
+]

@@ -1,0 +1,693 @@
+{
+  "uid": {
+    "type": "string",
+    "format": "uuid",
+    "required": false,
+    "nullable": false,
+    "allowed_on_action": [
+      "read"
+    ]
+  },
+  "first_name": {
+    "type": "string",
+    "required": true,
+    "nullable": false,
+    "allowed_on_action": [
+      "read",
+      "create",
+      "update"
+    ],
+    "field_name": "First Name"
+  },
+  "last_name": {
+    "type": "string",
+    "required": true,
+    "nullable": false,
+    "allowed_on_action": [
+      "read",
+      "create",
+      "update"
+    ],
+    "field_name": "Last Name"
+  },
+  "email": {
+    "type": "string",
+    "format": "email",
+    "required": true,
+    "nullable": false,
+    "allowed_on_action": [
+      "read",
+      "create",
+      "update"
+    ],
+    "field_name": "Primary Email"
+  },
+  "name_prefix": {
+    "type": "string",
+    "required": false,
+    "nullable": true,
+    "allowed_on_action": [
+      "read",
+      "create",
+      "update"
+    ],
+    "field_name": "Name Prefix"
+  },
+  "home_email": {
+    "type": "string",
+    "format": "email",
+    "required": false,
+    "nullable": true,
+    "allowed_on_action": [
+      "read",
+      "create",
+      "update"
+    ],
+    "field_name": "Home Email"
+  },
+  "work_email": {
+    "type": "string",
+    "format": "email",
+    "required": false,
+    "nullable": true,
+    "allowed_on_action": [
+      "read",
+      "create",
+      "update"
+    ],
+    "field_name": "Work Email"
+  },
+  "send_welcome_email": {
+    "type": "boolean",
+    "required": false,
+    "nullable": false,
+    "allowed_on_action": [
+      "create",
+      "update"
+    ]
+  },
+  "phone": {
+    "type": "string",
+    "required": false,
+    "nullable": true,
+    "allowed_on_action": [
+      "read",
+      "create",
+      "update"
+    ],
+    "field_name": "Primary Phone"
+  },
+  "home_phone": {
+    "type": "string",
+    "required": false,
+    "nullable": true,
+    "allowed_on_action": [
+      "read",
+      "create",
+      "update"
+    ],
+    "field_name": "Home Phone"
+  },
+  "work_phone": {
+    "type": "string",
+    "required": false,
+    "nullable": true,
+    "allowed_on_action": [
+      "read",
+      "create",
+      "update"
+    ],
+    "field_name": "Work Phone"
+  },
+  "shop_phone": {
+    "type": "string",
+    "required": false,
+    "nullable": true,
+    "allowed_on_action": [
+      "read",
+      "create",
+      "update"
+    ],
+    "field_name": "Shop Phone"
+  },
+  "title": {
+    "type": "string",
+    "required": false,
+    "nullable": true,
+    "allowed_on_action": [
+      "read",
+      "create",
+      "update"
+    ],
+    "field_name": "Title"
+  },
+  "active": {
+    "type": "boolean",
+    "required": false,
+    "nullable": false,
+    "allowed_on_action": [
+      "read"
+    ]
+  },
+  "role": {
+    "type": "string",
+    "required": true,
+    "nullable": false,
+    "allowed_values": [
+      "Lead",
+      "Prospect",
+      "Client"
+    ],
+    "allowed_on_action": [
+      "create"
+    ],
+    "field_name": "Role"
+  },
+  "tags": {
+    "type": "array",
+    "required": false,
+    "nullable": false,
+    "allowed_on_action": [
+      "read",
+      "create",
+      "update"
+    ],
+    "field_name": "Tags"
+  },
+  "website": {
+    "type": "string",
+    "format": "uri",
+    "required": false,
+    "nullable": true,
+    "allowed_on_action": [
+      "read",
+      "create",
+      "update"
+    ],
+    "field_name": "Website"
+  },
+  "background_info": {
+    "type": "string",
+    "required": false,
+    "nullable": true,
+    "allowed_on_action": [
+      "read",
+      "create",
+      "update"
+    ],
+    "field_name": "Background Info"
+  },
+  "created": {
+    "type": "date-time",
+    "format": "yyyy-mm-ddThh:mm:ss+00:00",
+    "required": false,
+    "nullable": false,
+    "allowed_on_action": [
+      "read"
+    ]
+  },
+  "notes": {
+    "type": "array",
+    "required": false,
+    "nullable": false,
+    "allowed_on_action": [
+      "create",
+      "update"
+    ],
+    "items": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "required": true,
+          "nullable": false
+        },
+        "note": {
+          "type": "string",
+          "required": false,
+          "nullable": true
+        },
+        "date": {
+          "type": "string",
+          "format": "yyyy-mm-dd",
+          "required": true,
+          "nullable": false
+        }
+      }
+    }
+  },
+  "company": {
+    "type": "object",
+    "required": false,
+    "nullable": true,
+    "allowed_on_action": [
+      "create",
+      "update"
+    ],
+    "properties": {
+      "uid": {
+        "type": "string",
+        "format": "uuid",
+        "required": false,
+        "nullable": false,
+        "allowed_on_action": [
+          "read"
+        ]
+      },
+      "name": {
+        "type": "string",
+        "required": true,
+        "nullable": false,
+        "allowed_on_action": [
+          "read",
+          "create",
+          "update"
+        ],
+        "field_name": "Name"
+      },
+      "create_company_if_not_exists": {
+        "type": "boolean",
+        "required": true,
+        "nullable": false,
+        "allowed_on_action": [
+          "create",
+          "update"
+        ]
+      }
+    }
+  },
+  "companies": {
+    "type": "array",
+    "required": false,
+    "nullable": false,
+    "allowed_on_action": [
+      "read"
+    ]
+  },
+  "address": {
+    "type": "object",
+    "required": false,
+    "nullable": true,
+    "allowed_on_action": [
+      "read",
+      "create",
+      "update"
+    ],
+    "properties": {
+      "address_line_1": {
+        "type": "string",
+        "required": false,
+        "nullable": true,
+        "allowed_on_action": [
+          "read",
+          "create",
+          "update"
+        ],
+        "field_name": "Address Line 1"
+      },
+      "address_line_2": {
+        "type": "string",
+        "required": false,
+        "nullable": true,
+        "allowed_on_action": [
+          "read",
+          "create",
+          "update"
+        ],
+        "field_name": "Address Line 2"
+      },
+      "city": {
+        "type": "string",
+        "required": false,
+        "nullable": true,
+        "allowed_on_action": [
+          "read",
+          "create",
+          "update"
+        ],
+        "field_name": "City"
+      },
+      "state": {
+        "type": "string",
+        "required": false,
+        "nullable": true,
+        "allowed_on_action": [
+          "read",
+          "create",
+          "update"
+        ],
+        "field_name": "State / Province"
+      },
+      "country": {
+        "type": "string",
+        "required": false,
+        "nullable": true,
+        "allowed_on_action": [
+          "read",
+          "create",
+          "update"
+        ],
+        "field_name": "Country"
+      },
+      "zip": {
+        "type": "string",
+        "required": false,
+        "nullable": true,
+        "allowed_on_action": [
+          "read",
+          "create",
+          "update"
+        ],
+        "field_name": "ZIP / Postal Code"
+      }
+    }
+  },
+  "circles": {
+    "type": "object",
+    "required": false,
+    "nullable": true,
+    "allowed_on_action": [
+      "read",
+      "create",
+      "update"
+    ],
+    "properties": {
+      "add": {
+        "type": "array",
+        "allowed_on_action": [
+          "create",
+          "update"
+        ],
+        "nullable": false
+      },
+      "remove": {
+        "type": "array",
+        "allowed_on_action": [
+          "update"
+        ],
+        "nullable": false
+      }
+    }
+  },
+  "custom_fields": {
+    "type": "object",
+    "required": false,
+    "nullable": true,
+    "allowed_on_action": [
+      "read",
+      "create",
+      "update"
+    ],
+    "properties": {
+      "350f36de-71be-475a-a5ed-63424431c09a": {
+        "type": "string",
+        "required": false,
+        "nullable": true,
+        "allowed_on_action": [
+          "read",
+          "create",
+          "update"
+        ],
+        "field_name": "Name of Business/Organization",
+        "field_description": "Name of Business/Organization"
+      },
+      "e3a022a4-1ff8-4370-9f73-2eb8508cb2d9": {
+        "type": "string",
+        "required": false,
+        "nullable": true,
+        "allowed_on_action": [
+          "read",
+          "create",
+          "update"
+        ],
+        "field_name": "Property Details",
+        "field_description": "Residence Details"
+      },
+      "66abc928-96a6-45b7-8b43-387c9dd074b8": {
+        "type": "string",
+        "required": false,
+        "nullable": true,
+        "allowed_on_action": [
+          "read",
+          "create",
+          "update"
+        ],
+        "field_name": "Contact Person Email Address",
+        "field_description": "Contact Email"
+      },
+      "f5d1e592-c111-4926-94aa-4c83685cfe00": {
+        "type": "string",
+        "required": false,
+        "nullable": true,
+        "allowed_on_action": [
+          "read",
+          "create",
+          "update"
+        ],
+        "field_name": "Contact Person Phone Number(s)",
+        "field_description": "Contact Person Phone Number(s)"
+      },
+      "9b86ad32-cb2b-492d-8a00-026fc3154e81": {
+        "type": "string",
+        "required": false,
+        "nullable": true,
+        "allowed_on_action": [
+          "read",
+          "create",
+          "update"
+        ],
+        "field_name": "Contact Person",
+        "field_description": "Contact Person"
+      },
+      "331f0e27-f764-4495-8165-73f3b94dd66b": {
+        "type": "string",
+        "required": false,
+        "nullable": true,
+        "allowed_on_action": [
+          "read",
+          "create",
+          "update"
+        ],
+        "field_name": "Other Nature of Business",
+        "field_description": "If other, provide a description of your business nature"
+      },
+      "436042ff-3821-4fa7-a839-1bff22f47c2c": {
+        "type": "string",
+        "required": false,
+        "nullable": true,
+        "allowed_values": [
+          "Manufacturer",
+          "Trader",
+          "Authorized Agent",
+          "Other"
+        ],
+        "allowed_on_action": [
+          "read",
+          "create",
+          "update"
+        ],
+        "field_name": "Nature of Business",
+        "field_description": "Nature of Business"
+      },
+      "1989c129-b230-4564-bc59-e4ca1bf9e377": {
+        "type": "string",
+        "required": false,
+        "nullable": true,
+        "allowed_on_action": [
+          "read",
+          "create",
+          "update"
+        ],
+        "field_name": "Other business type",
+        "field_description": "If other, provide a description of your business type"
+      },
+      "20eef1e7-1359-406b-9b64-3792b6a95022": {
+        "type": "string",
+        "required": false,
+        "nullable": true,
+        "allowed_values": [
+          "Sole Proprietorship",
+          "Partnership",
+          "Corporation",
+          "LLC",
+          "Non-profit",
+          "Other"
+        ],
+        "allowed_on_action": [
+          "read",
+          "create",
+          "update"
+        ],
+        "field_name": "Business type",
+        "field_description": "Business type"
+      },
+      "ef6586cf-586a-4fe3-85f1-30bacfbd58c0": {
+        "type": "string",
+        "required": false,
+        "nullable": true,
+        "allowed_on_action": [
+          "read",
+          "create",
+          "update"
+        ],
+        "field_name": "Phone Number",
+        "field_description": "Phone Number"
+      },
+      "360ff665-58d2-4c93-995a-205d44163b36": {
+        "type": "string",
+        "format": "uri",
+        "required": false,
+        "nullable": true,
+        "allowed_on_action": [
+          "read",
+          "create",
+          "update"
+        ],
+        "field_name": "Business website",
+        "field_description": "Business website"
+      },
+      "499408c6-9c72-4600-88e9-d7fa26cfc004": {
+        "type": "string",
+        "required": false,
+        "nullable": true,
+        "allowed_on_action": [
+          "read",
+          "create",
+          "update"
+        ],
+        "field_name": "Company Name",
+        "field_description": "Company Name"
+      },
+      "df52c620-92db-4036-9df6-252af5590d72": {
+        "type": "string",
+        "required": false,
+        "nullable": true,
+        "allowed_on_action": [
+          "read",
+          "create",
+          "update"
+        ],
+        "field_name": "Additional Info",
+        "field_description": "Is there anything else you'd like to add?"
+      },
+      "efeddbed-a24f-4580-9e41-5263741ad642": {
+        "type": "string",
+        "required": false,
+        "nullable": true,
+        "allowed_on_action": [
+          "read",
+          "create",
+          "update"
+        ],
+        "field_name": "Business City",
+        "field_description": "City"
+      },
+      "1dc48255-429f-44e6-8b52-3d4cd41c6989": {
+        "type": "string",
+        "required": false,
+        "nullable": true,
+        "allowed_on_action": [
+          "read",
+          "create",
+          "update"
+        ],
+        "field_name": "Business Address",
+        "field_description": "Business Address"
+      },
+      "35daec0b-d952-4cbb-ab70-0d686fd212a8": {
+        "type": "string",
+        "required": false,
+        "nullable": true,
+        "allowed_on_action": [
+          "read",
+          "create",
+          "update"
+        ],
+        "field_name": "Position/Job Title",
+        "field_description": "Position/Job Title"
+      },
+      "baa0daf5-4028-4bbb-971a-affcd5a1a428": {
+        "type": "file",
+        "required": false,
+        "nullable": true,
+        "allowed_on_action": [
+          "read",
+          "create",
+          "update"
+        ],
+        "field_name": "Driver\u2019s License",
+        "field_description": "Driver\u2019s License"
+      },
+      "cad38114-f1cb-47a1-9b4c-7e537bbaa521": {
+        "type": "string",
+        "required": false,
+        "nullable": true,
+        "allowed_on_action": [
+          "read",
+          "create",
+          "update"
+        ],
+        "field_name": "Your business category",
+        "field_description": "Business Category"
+      },
+      "d5b5b694-6e3e-4db3-be44-3e286224c9e6": {
+        "type": "number",
+        "required": false,
+        "nullable": true,
+        "allowed_on_action": [
+          "read",
+          "create",
+          "update"
+        ],
+        "field_name": "VAT/GST Number",
+        "field_description": "VAT/GST Number"
+      },
+      "69c349f9-9471-4b42-afe1-4e9bfc21d1de": {
+        "type": "string",
+        "required": false,
+        "nullable": true,
+        "allowed_on_action": [
+          "read",
+          "create",
+          "update"
+        ],
+        "field_name": "Company Email Address",
+        "field_description": "Company Email Address"
+      },
+      "89522dd4-98fa-4376-8793-db392be73f5c": {
+        "type": "string",
+        "required": false,
+        "nullable": true,
+        "allowed_on_action": [
+          "read",
+          "create",
+          "update"
+        ],
+        "field_name": "Company Contact Number",
+        "field_description": "Company Contact Number"
+      },
+      "6c6db8ac-d443-4396-a918-22e4c7d188e9": {
+        "type": "string",
+        "required": false,
+        "nullable": true,
+        "allowed_on_action": [
+          "read",
+          "create",
+          "update"
+        ],
+        "field_name": "Company Address",
+        "field_description": "Company Address"
+      }
+    }
+  },
+  "target_custom_fields": {
+    "type": "object",
+    "required": false,
+    "nullable": true,
+    "allowed_on_action": [
+      "read",
+      "create",
+      "update"
+    ]
+  }
+}
