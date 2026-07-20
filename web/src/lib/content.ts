@@ -15,6 +15,7 @@ export const nav = [
   { href: "/our-location", label: "Our Location" },
   { href: "/about", label: "More on MEGALODOME" },
   { href: "/pictures", label: "Pictures" },
+  { href: "/invest", label: "Investors" },
   { href: "/team", label: "Team" },
   { href: "/news", label: "News" },
   { href: "/faq", label: "FAQ" },

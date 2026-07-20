@@ -1,8 +1,18 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useMemo, useState } from "react";
+import { useSearchParams } from "next/navigation";
 
 export function ContactForm() {
+  const searchParams = useSearchParams();
+  const defaultInterest = useMemo(() => {
+    const q = searchParams.get("interest");
+    if (q && ["general", "investor", "media", "partnership"].includes(q)) {
+      return q;
+    }
+    return "general";
+  }, [searchParams]);
+
   const [status, setStatus] = useState<"idle" | "loading" | "ok" | "error">(
     "idle"
   );
@@ -58,10 +68,22 @@ export function ContactForm() {
           </div>
         </div>
         <div>
+          <label className="mb-2 block text-sm text-[var(--muted)]" htmlFor="company">
+            Company
+          </label>
+          <input className="input" id="company" name="company" />
+        </div>
+        <div>
           <label className="mb-2 block text-sm text-[var(--muted)]" htmlFor="interest">
             I am interested in
           </label>
-          <select className="input" id="interest" name="interest" defaultValue="general">
+          <select
+            className="input"
+            id="interest"
+            name="interest"
+            defaultValue={defaultInterest}
+            key={defaultInterest}
+          >
             <option value="general">General inquiry</option>
             <option value="investor">Investor information</option>
             <option value="media">Media / press</option>
@@ -74,7 +96,6 @@ export function ContactForm() {
           </label>
           <textarea className="textarea" id="message" name="message" required />
         </div>
-        {/* honeypot */}
         <input
           type="text"
           name="company_website"

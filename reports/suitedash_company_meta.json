@@ -1,0 +1,377 @@
+{
+  "uid": {
+    "type": "string",
+    "format": "uuid",
+    "required": false,
+    "nullable": false,
+    "allowed_on_action": [
+      "read"
+    ]
+  },
+  "role": {
+    "type": "string",
+    "required": true,
+    "nullable": false,
+    "allowed_values": [
+      "Lead",
+      "Prospect",
+      "Client"
+    ],
+    "allowed_on_action": [
+      "read",
+      "create"
+    ],
+    "field_name": "Role"
+  },
+  "name": {
+    "type": "string",
+    "required": true,
+    "nullable": false,
+    "allowed_on_action": [
+      "read",
+      "create",
+      "update"
+    ],
+    "field_name": "Name"
+  },
+  "phone": {
+    "type": "string",
+    "required": false,
+    "nullable": true,
+    "allowed_on_action": [
+      "read",
+      "create",
+      "update"
+    ],
+    "field_name": "Phone"
+  },
+  "category": {
+    "type": "object",
+    "required": false,
+    "nullable": true,
+    "allowed_on_action": [
+      "read",
+      "create",
+      "update"
+    ],
+    "field_name": "Category",
+    "properties": {
+      "name": {
+        "type": "string",
+        "required": true,
+        "nullable": false,
+        "allowed_on_action": [
+          "read",
+          "create",
+          "update"
+        ],
+        "field_name": "Name"
+      },
+      "color": {
+        "type": "string",
+        "required": false,
+        "nullable": true,
+        "allowed_on_action": [
+          "read"
+        ],
+        "field_name": "Color"
+      },
+      "isDefault": {
+        "type": "boolean",
+        "required": false,
+        "nullable": false,
+        "allowed_on_action": [
+          "read"
+        ],
+        "field_name": "Set as the Default"
+      }
+    }
+  },
+  "primaryContact": {
+    "type": "object",
+    "required": false,
+    "nullable": false,
+    "allowed_on_action": [
+      "read",
+      "create"
+    ],
+    "properties": {
+      "uid": {
+        "type": "string",
+        "format": "uuid",
+        "required": false,
+        "nullable": false,
+        "allowed_on_action": [
+          "read"
+        ]
+      },
+      "first_name": {
+        "type": "string",
+        "description": "Required when 'create_primary_contact_if_not_exists' is true",
+        "required": false,
+        "nullable": false,
+        "allowed_on_action": [
+          "read",
+          "create"
+        ],
+        "field_name": "First Name"
+      },
+      "last_name": {
+        "type": "string",
+        "description": "Required when 'create_primary_contact_if_not_exists' is true",
+        "required": false,
+        "nullable": false,
+        "allowed_on_action": [
+          "read",
+          "create"
+        ],
+        "field_name": "Last Name"
+      },
+      "name_prefix": {
+        "type": "string",
+        "required": false,
+        "nullable": true,
+        "allowed_on_action": [
+          "read"
+        ],
+        "field_name": "Name Prefix"
+      },
+      "email": {
+        "type": "string",
+        "format": "email",
+        "required": true,
+        "nullable": false,
+        "allowed_on_action": [
+          "read",
+          "create"
+        ],
+        "field_name": "Primary Email"
+      },
+      "role": {
+        "type": "string",
+        "required": false,
+        "nullable": false,
+        "allowed_values": [
+          "Lead",
+          "Prospect",
+          "Client"
+        ],
+        "allowed_on_action": [
+          "read"
+        ],
+        "field_name": "Role"
+      },
+      "send_welcome_email": {
+        "type": "boolean",
+        "description": "Send welcome email to the primary contact in case was not already sent",
+        "required": false,
+        "nullable": false,
+        "allowed_on_action": [
+          "create"
+        ]
+      },
+      "create_primary_contact_if_not_exists": {
+        "type": "boolean",
+        "description": "Create a Primary Contact with all provided data if the email does not exists",
+        "required": true,
+        "nullable": false,
+        "allowed_on_action": [
+          "create"
+        ]
+      },
+      "prevent_individual_mode": {
+        "type": "boolean",
+        "description": "Prevent this Primary Contact from switching into 'Individual Mode'",
+        "required": false,
+        "nullable": false,
+        "allowed_on_action": [
+          "create"
+        ]
+      }
+    }
+  },
+  "home_phone": {
+    "type": "string",
+    "required": false,
+    "nullable": true,
+    "allowed_on_action": [
+      "read",
+      "create",
+      "update"
+    ],
+    "field_name": "Home Phone"
+  },
+  "work_phone": {
+    "type": "string",
+    "required": false,
+    "nullable": true,
+    "allowed_on_action": [
+      "read",
+      "create",
+      "update"
+    ],
+    "field_name": "Work Phone"
+  },
+  "shop_phone": {
+    "type": "string",
+    "required": false,
+    "nullable": true,
+    "allowed_on_action": [
+      "read",
+      "create",
+      "update"
+    ],
+    "field_name": "Shop Phone"
+  },
+  "website": {
+    "type": "string",
+    "format": "uri",
+    "required": false,
+    "nullable": true,
+    "allowed_on_action": [
+      "read",
+      "create",
+      "update"
+    ],
+    "field_name": "Website"
+  },
+  "tags": {
+    "type": "array",
+    "required": false,
+    "nullable": false,
+    "allowed_on_action": [
+      "read",
+      "create",
+      "update"
+    ],
+    "field_name": "Tags"
+  },
+  "background_info": {
+    "type": "string",
+    "required": false,
+    "nullable": true,
+    "allowed_on_action": [
+      "read",
+      "create",
+      "update"
+    ],
+    "field_name": "Background Info"
+  },
+  "created": {
+    "type": "date-time",
+    "format": "yyyy-mm-ddThh:mm:ss+00:00",
+    "required": false,
+    "nullable": false,
+    "allowed_on_action": [
+      "read"
+    ]
+  },
+  "address": {
+    "type": "object",
+    "required": false,
+    "nullable": true,
+    "allowed_on_action": [
+      "read",
+      "create",
+      "update"
+    ],
+    "properties": {
+      "address_line_1": {
+        "type": "string",
+        "required": false,
+        "nullable": true,
+        "allowed_on_action": [
+          "read",
+          "create",
+          "update"
+        ],
+        "field_name": "Address Line 1"
+      },
+      "address_line_2": {
+        "type": "string",
+        "required": false,
+        "nullable": true,
+        "allowed_on_action": [
+          "read",
+          "create",
+          "update"
+        ],
+        "field_name": "Address Line 2"
+      },
+      "city": {
+        "type": "string",
+        "required": false,
+        "nullable": true,
+        "allowed_on_action": [
+          "read",
+          "create",
+          "update"
+        ],
+        "field_name": "City"
+      },
+      "state": {
+        "type": "string",
+        "required": false,
+        "nullable": true,
+        "allowed_on_action": [
+          "read",
+          "create",
+          "update"
+        ],
+        "field_name": "State / Province"
+      },
+      "country": {
+        "type": "string",
+        "required": false,
+        "nullable": true,
+        "allowed_on_action": [
+          "read",
+          "create",
+          "update"
+        ],
+        "field_name": "Country"
+      },
+      "zip": {
+        "type": "string",
+        "required": false,
+        "nullable": true,
+        "allowed_on_action": [
+          "read",
+          "create",
+          "update"
+        ],
+        "field_name": "ZIP / Postal Code"
+      }
+    }
+  },
+  "public_custom_fields": {
+    "type": "object",
+    "required": false,
+    "nullable": true,
+    "allowed_on_action": [
+      "read",
+      "create",
+      "update"
+    ]
+  },
+  "private_custom_fields": {
+    "type": "object",
+    "required": false,
+    "nullable": true,
+    "allowed_on_action": [
+      "read",
+      "create",
+      "update"
+    ]
+  },
+  "target_custom_fields": {
+    "type": "object",
+    "required": false,
+    "nullable": true,
+    "allowed_on_action": [
+      "read",
+      "create",
+      "update"
+    ]
+  }
+}

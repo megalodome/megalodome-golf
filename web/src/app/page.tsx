@@ -27,8 +27,11 @@ export default function HomePage() {
             <Link href="/our-location" className="btn btn-primary">
               Explore the location
             </Link>
+            <Link href="/invest" className="btn btn-primary">
+              Investors
+            </Link>
             <Link href="/contact" className="btn btn-secondary">
-              Investor / media contact
+              Contact
             </Link>
             <a
               href={site.flyerPath}

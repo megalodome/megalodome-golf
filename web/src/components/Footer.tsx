@@ -21,6 +21,7 @@ export function Footer() {
             <Link href="/our-mission">Our Mission</Link>
             <Link href="/our-location">Our Location</Link>
             <Link href="/pictures">Pictures</Link>
+            <Link href="/invest">Investors</Link>
             <Link href="/news">News</Link>
             <Link href="/faq">FAQ</Link>
           </div>
@@ -30,6 +31,7 @@ export function Footer() {
             Investors & contact
           </div>
           <div className="flex flex-col gap-2 text-[var(--muted)]">
+            <Link href="/invest/apply">Investor inquiry</Link>
             <Link href="/contact">Contact us</Link>
             <a href={site.flyerPath} target="_blank" rel="noreferrer">
               2026 Flyer (PDF)

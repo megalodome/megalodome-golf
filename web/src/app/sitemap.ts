@@ -8,6 +8,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/our-location",
     "/about",
     "/pictures",
+    "/invest",
+    "/invest/apply",
     "/team",
     "/news",
     "/faq",
