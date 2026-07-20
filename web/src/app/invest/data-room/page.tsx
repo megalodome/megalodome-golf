@@ -2,44 +2,14 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { PageHero } from "@/components/PageHero";
 import { InvestorDisclaimer, InvestorSubnav } from "@/components/InvestorChrome";
-import { investor } from "@/lib/investor";
+import { InvestorForm } from "@/components/InvestorForm";
+import docs from "@/lib/investorDocsIndex.json";
 
 export const metadata: Metadata = {
   title: "Data Room",
   description:
-    "Tiered investor data room index for MEGALODOME GOLF Equity Fund I.",
+    "Tiered investor data room for MEGALODOME GOLF Equity Fund I — downloads and access gates.",
 };
-
-const tiers = [
-  {
-    id: "0",
-    name: "Tier 0 — Public",
-    gate: "None — 506(c) general solicitation materials",
-    items: investor.tiers.tier0,
-    cta: { href: "/invest/opportunity", label: "View opportunity overview" },
-  },
-  {
-    id: "1",
-    name: "Tier 1 — Pre-meeting",
-    gate: "Prospect self-identifies as accredited; typically 2–3 days pre-meeting",
-    items: investor.tiers.tier1,
-    cta: { href: "/invest/apply", label: "Request Tier 1 pack" },
-  },
-  {
-    id: "2",
-    name: "Tier 2 — Data room",
-    gate: "Signed mutual NDA; accreditation verification underway",
-    items: investor.tiers.tier2,
-    cta: { href: "/invest/apply", label: "Request NDA / data room access" },
-  },
-  {
-    id: "3",
-    name: "Tier 3 — Offering & close",
-    gate: "Verified accredited investors only (counsel documents)",
-    items: investor.tiers.tier3,
-    cta: { href: "/invest/apply", label: "Begin verification path" },
-  },
-];
 
 export default function DataRoomPage() {
   return (
@@ -47,77 +17,114 @@ export default function DataRoomPage() {
       <InvestorSubnav current="/invest/data-room" />
       <PageHero
         eyebrow="Data room"
-        title="Document tiers & access gates"
-        subtitle="Structured like our internal data-room index: public solicitation materials first; proprietary model and contracts after NDA and verification."
+        title="Document tiers, downloads & access"
+        subtitle="Tier 0 materials are available here. Tier 1 pack is emailed after accredited self-ID via the inquiry form. Tier 2 opens after Mutual NDA."
       />
       <section className="section">
-        <div className="container space-y-6">
-          <div className="card p-6">
-            <p className="muted leading-7">
-              Website pages summarize Tier 0–1 content for accredited-investor
-              solicitation. Full native files (deck, workbook, NDA execution)
-              are delivered through the raise team / SuiteDash portal after the
-              correct gate. Tier 3 securities documents are produced with
-              securities counsel.
+        <div className="container space-y-8">
+          <article className="card p-6">
+            <div className="flex flex-wrap items-start justify-between gap-4">
+              <div>
+                <h2 className="display text-2xl text-[var(--gold-soft)]">
+                  Tier 0 — Public solicitation
+                </h2>
+                <p className="muted mt-2 text-sm">
+                  Gate: none (Reg D 506(c) general solicitation materials)
+                </p>
+              </div>
+            </div>
+            <ul className="mt-4 grid gap-2 md:grid-cols-2">
+              {docs.tier0.map((d) => (
+                <li key={d.file}>
+                  <a
+                    className="block rounded-lg border border-[var(--line)] px-3 py-3 text-sm text-[var(--gold)] hover:bg-white/5"
+                    href={d.file}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Download: {d.title}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </article>
+
+          <article className="card p-6">
+            <h2 className="display text-2xl text-[var(--gold-soft)]">
+              Tier 1 — Pre-meeting pack
+            </h2>
+            <p className="muted mt-2 text-sm">
+              Gate: accredited / qualified self-ID. Request below or on the apply
+              form — we email the full pack automatically.
             </p>
-          </div>
+            <ul className="mt-4 grid gap-2 md:grid-cols-2">
+              {docs.tier1.map((d) => (
+                <li
+                  key={d.file}
+                  className="rounded-lg border border-[var(--line)] px-3 py-3 text-sm text-[var(--muted)]"
+                >
+                  {d.title}{" "}
+                  <span className="text-xs">(emailed after inquiry)</span>
+                </li>
+              ))}
+            </ul>
+          </article>
 
-          <div className="grid gap-4">
-            {tiers.map((t) => (
-              <article key={t.id} className="card p-6">
-                <div className="flex flex-wrap items-start justify-between gap-4">
-                  <div>
-                    <h2 className="display text-2xl text-[var(--gold-soft)]">
-                      {t.name}
-                    </h2>
-                    <p className="muted mt-2 text-sm">
-                      <strong className="text-white">Gate:</strong> {t.gate}
-                    </p>
-                  </div>
-                  <Link href={t.cta.href} className="btn btn-secondary">
-                    {t.cta.label}
-                  </Link>
-                </div>
-                <ul className="mt-4 grid gap-2 md:grid-cols-2">
-                  {t.items.map((item) => (
-                    <li
-                      key={item}
-                      className="rounded-lg border border-[var(--line)] px-3 py-2 text-sm text-[var(--muted)]"
-                    >
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </article>
-            ))}
-          </div>
-
-          <div className="card p-6">
-            <h3 className="display text-xl">On this website now</h3>
-            <ul className="muted mt-3 list-disc space-y-2 pl-5 leading-7">
-              <li>
-                <Link className="text-[var(--gold)]" href="/invest/opportunity">
-                  Opportunity overview
-                </Link>{" "}
-                — executive + one-pager + pro-forma snapshot
+          <article className="card p-6">
+            <h2 className="display text-2xl text-[var(--gold-soft)]">
+              Tier 2 — NDA data room
+            </h2>
+            <p className="muted mt-2 text-sm leading-7">
+              Gate: signed Mutual NDA + accreditation verification underway.
+              Includes Target Asset Preview, full pro-forma workbook, and deeper
+              diligence as available. Submit with <strong className="text-white">NDA
+              requested</strong> checked to receive the NDA template immediately.
+            </p>
+            <ul className="mt-4 grid gap-2 md:grid-cols-2">
+              <li className="rounded-lg border border-[var(--line)] px-3 py-3 text-sm text-[var(--muted)]">
+                Mutual NDA (emailed on request)
               </li>
-              <li>
-                <Link className="text-[var(--gold)]" href="/invest/faq">
-                  Investor FAQ
-                </Link>
+              <li className="rounded-lg border border-[var(--line)] px-3 py-3 text-sm text-[var(--muted)]">
+                Target Asset Preview (after NDA)
               </li>
-              <li>
-                <Link className="text-[var(--gold)]" href="/invest/process">
-                  Process / roadmap
-                </Link>
+              <li className="rounded-lg border border-[var(--line)] px-3 py-3 text-sm text-[var(--muted)]">
+                Full Investor Pro-Forma workbook (after NDA)
               </li>
-              <li>
-                <Link className="text-[var(--gold)]" href="/invest/apply">
-                  Inquiry form
-                </Link>{" "}
-                — creates CRM lead + pipeline routing
+              <li className="rounded-lg border border-[var(--line)] px-3 py-3 text-sm text-[var(--muted)]">
+                Additional contracts / designs as available
               </li>
             </ul>
+          </article>
+
+          <article className="card p-6">
+            <h2 className="display text-2xl text-[var(--gold-soft)]">
+              Tier 3 — Offering & close
+            </h2>
+            <p className="muted mt-2 text-sm leading-7">
+              Verified accredited investors only. PPM, subscription documents, and
+              operating agreement are issued with securities counsel (Bond Conway
+              process) — not published on the website.
+            </p>
+          </article>
+
+          <div>
+            <div className="eyebrow mb-2">Request access</div>
+            <h2 className="display mb-4 text-3xl">Get the pack / NDA</h2>
+            <div className="grid gap-8 lg:grid-cols-[1.15fr_.85fr]">
+              <InvestorForm defaultTier1 defaultNda />
+              <div className="card h-fit p-6">
+                <h3 className="display text-xl">What happens</h3>
+                <ol className="muted mt-4 list-decimal space-y-3 pl-5 leading-7">
+                  <li>CRM Lead created in SuiteDash (investor tags + score)</li>
+                  <li>Tier 0–1 PDFs emailed to you (if selected)</li>
+                  <li>Mutual NDA emailed if data-room access requested</li>
+                  <li>Raise team follows up and opens Tier 2 after countersignature</li>
+                </ol>
+                <Link href="/invest/apply" className="btn btn-secondary mt-6">
+                  Full apply page
+                </Link>
+              </div>
+            </div>
           </div>
 
           <div className="card p-6">

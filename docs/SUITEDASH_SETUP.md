@@ -1,24 +1,19 @@
-# SuiteDash setup for MEGALODOME investor funnel
+# SuiteDash CRM setup — complete checklist
 
-Website code is live. Contacts are created via Secure API as **Lead** with tags:
-`investor`, `website`, `source:megalodomegolf.com`.
+Website now:
+- Creates SuiteDash **Lead** with investor tags + score
+- Emails Tier 0/1 PDF pack (+ NDA if requested) via Resend
+- Logs to Supabase
+- Notifies raise team
 
-**Deals cannot be created via API.** Complete the UI steps below so each investor
-lead also gets a Deal card in the pipeline.
+## Required in SuiteDash UI (deals cannot be API-created)
 
-## 1) Circle
-CRM → Circles → **+ Add**
-- Name: `Investors`
+### 1. Circle
+CRM → Circles → create **`Investors`** (exact spelling)
 
-API already requests `circles.add: ["Investors"]`. If the circle name differs,
-rename to match exactly or update `circlesToAdd` in code.
-
-## 2) Investor pipeline
-CRM → Deals → Pipelines → **+ Add Pipeline**
-- Title: `Investor Raise`
-- Currency: USD
-
-### Stages (Manage Stages)
+### 2. Pipeline
+CRM → Deals → Pipelines → **`Investor Raise`**
+Stages:
 1. New Inquiry
 2. Info Pack Sent
 3. Call Booked
@@ -28,47 +23,34 @@ CRM → Deals → Pipelines → **+ Add Pipeline**
 7. Won
 8. Lost
 
-## 3) Deal Generator
-CRM → Deals → Generators → **+ Add Deal Generator**
-- Reference title: `Website Investor Lead`
-- Deal title: `Investor — {{Contact First Name}} {{Contact Last Name}}` (use placeholders available in UI)
-- Pipeline: `Investor Raise`
-- Starting stage: `New Inquiry`
-- Expected value: optional
-- Followers: raise team staff
-- Toggle notify followers on create
+### 3. Deal Generator
+CRM → Deals → Generators → **`Website Investor Lead`**
+- Pipeline: Investor Raise
+- Stage: New Inquiry
+- Title: Investor — {{First Name}} {{Last Name}}
+- Followers: raise team + notify
 
-## 4) Automation (critical)
-Attach the Deal Generator so API website leads open deals:
+### 4. Automation (critical)
+When contact is created/updated with tag **`investor`** OR added to circle **Investors**:
+- Apply Deal Generator `Website Investor Lead`
+- Optional: move/create follow-up task "Send personal note within 24h"
+- Optional: on tag `pack:tier1` ensure stage reflects Info Pack Sent (manual or automation)
 
-### Option A — on Kickoff Form (if you also embed a form)
-Forms → Kickoff Form automations → Apply Deal Generator `Website Investor Lead`
+### 5. Optional drip
+Marketing → Drip: "Investor nurture 21-day" for circle Investors / tag investor
 
-### Option B — contact automation / generator on tag or circle
-Wherever SuiteDash allows automation on contact create / tag add / circle add:
-- When tag contains `investor` OR circle `Investors`
-- → Apply Deal Generator `Website Investor Lead`
-
-### Option C — Zapier fallback
-Zapier: SuiteDash New Contact (filter tag investor) → create deal action if available
-or notify Slack + manual deal.
-
-Test after setup:
+### 6. Test
 1. Submit https://megalodome-golf.vercel.app/invest/apply
-2. Confirm CRM Lead + tags
-3. Confirm Deal appears in Investor Raise / New Inquiry
+2. Confirm email pack arrives
+3. Confirm SuiteDash Lead + tags (`investor`, `score:*`, `pack:tier1`)
+4. Confirm Deal appears in Investor Raise / New Inquiry after automation
 
-## 5) Optional Kickoff Form embed
-Create Kickoff Form “Investor Inquiry” (Role Lead) for a no-code alternate path.
-Embed snippet can be dropped into a future page section if desired.
-
-## 6) Cleanup
-Delete test contacts:
-- Hermes APITest
-- any `+test` emails from verification
-
-## Website endpoints
-- `GET /invest` — investor landing
-- `GET /invest/apply` — form
-- `POST /api/invest` — SuiteDash + Supabase + Resend
-- `POST /api/contact` — investor interest also syncs SuiteDash
+### Tags the website sets
+- `investor`
+- `website`
+- `source:megalodomegolf.com`
+- `score:hot|warm|cold`
+- `type:*`
+- `pack:tier0|tier1`
+- `nda-requested` (when NDA checked)
+- `utm:*` when present

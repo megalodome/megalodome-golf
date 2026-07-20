@@ -1,14 +1,37 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
-export function InvestorForm() {
+function readUtms() {
+  if (typeof window === "undefined") return {};
+  const p = new URLSearchParams(window.location.search);
+  const keys = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"];
+  const out: Record<string, string> = {};
+  for (const k of keys) {
+    const v = p.get(k);
+    if (v) out[k] = v;
+  }
+  return out;
+}
+
+export function InvestorForm({
+  defaultNda = false,
+  defaultTier1 = true,
+}: {
+  defaultNda?: boolean;
+  defaultTier1?: boolean;
+}) {
   const router = useRouter();
   const [status, setStatus] = useState<"idle" | "loading" | "ok" | "error">(
     "idle"
   );
   const [message, setMessage] = useState("");
+  const [utms, setUtms] = useState<Record<string, string>>({});
+
+  useEffect(() => {
+    setUtms(readUtms());
+  }, []);
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -16,6 +39,16 @@ export function InvestorForm() {
     setMessage("");
     const form = e.currentTarget;
     const data = Object.fromEntries(new FormData(form).entries());
+    // checkboxes
+    data.requestTier1 = form.querySelector<HTMLInputElement>("#requestTier1")
+      ?.checked
+      ? "true"
+      : "false";
+    data.requestNda = form.querySelector<HTMLInputElement>("#requestNda")
+      ?.checked
+      ? "true"
+      : "false";
+    Object.assign(data, utms);
 
     try {
       const res = await fetch("/api/invest", {
@@ -24,9 +57,7 @@ export function InvestorForm() {
         body: JSON.stringify(data),
       });
       const json = await res.json().catch(() => ({}));
-      if (!res.ok) {
-        throw new Error(json.error || "Failed to submit inquiry");
-      }
+      if (!res.ok) throw new Error(json.error || "Failed to submit inquiry");
       setStatus("ok");
       form.reset();
       router.push("/invest/thank-you");
@@ -146,11 +177,40 @@ export function InvestorForm() {
             id="message"
             name="message"
             required
-            placeholder="Tell us about your interest in MEGALODOME GOLF…"
+            placeholder="Tell us about your interest in MEGALODOME GOLF Equity Fund I…"
           />
         </div>
 
-        {/* honeypot */}
+        <div className="space-y-3 rounded-xl border border-[var(--line)] p-4">
+          <label className="flex items-start gap-3 text-sm text-[var(--muted)]">
+            <input
+              id="requestTier1"
+              name="requestTier1"
+              type="checkbox"
+              defaultChecked={defaultTier1}
+              className="mt-1"
+            />
+            <span>
+              Email me the <strong className="text-white">Tier 1 pre-meeting pack</strong>{" "}
+              (Executive Summary, Pro-Forma Summary, Roadmap, FAQ, Abbreviations).
+              I self-identify as an accredited investor / qualified prospect.
+            </span>
+          </label>
+          <label className="flex items-start gap-3 text-sm text-[var(--muted)]">
+            <input
+              id="requestNda"
+              name="requestNda"
+              type="checkbox"
+              defaultChecked={defaultNda}
+              className="mt-1"
+            />
+            <span>
+              Also send the <strong className="text-white">Mutual NDA</strong> so I can
+              request Tier 2 data-room access (full model / deeper diligence).
+            </span>
+          </label>
+        </div>
+
         <input
           type="text"
           name="company_website"
@@ -165,14 +225,14 @@ export function InvestorForm() {
           className="btn btn-primary w-full sm:w-auto"
           disabled={status === "loading"}
         >
-          {status === "loading" ? "Submitting…" : "Submit investor inquiry"}
+          {status === "loading" ? "Submitting…" : "Submit & email materials"}
         </button>
 
         {message ? <p className="text-red-300">{message}</p> : null}
         <p className="text-xs text-[var(--muted)]">
-          By submitting, you agree we may contact you about investment
-          opportunities related to MEGALODOME GOLF. This is not an offer to sell
-          securities.
+          By submitting, you agree we may contact you about investment opportunities
+          related to MEGALODOME GOLF. This is not an offer to sell securities. Any
+          offering is made solely through the Confidential PPM under Reg D 506(c).
         </p>
       </div>
     </form>

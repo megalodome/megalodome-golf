@@ -1,0 +1,49 @@
+{
+  "tier0": [
+    {
+      "title": "One-Pager",
+      "file": "/docs/investor/one-pager.pdf"
+    },
+    {
+      "title": "Pitch Deck Summary",
+      "file": "/docs/investor/pitch-deck-summary.pdf"
+    },
+    {
+      "title": "Marketing Flyer 2026",
+      "file": "/docs/flyer-2026.pdf"
+    }
+  ],
+  "tier1": [
+    {
+      "title": "Executive Summary",
+      "file": "/docs/investor/executive-summary.pdf"
+    },
+    {
+      "title": "Pro-Forma Summary",
+      "file": "/docs/investor/proforma-summary.pdf"
+    },
+    {
+      "title": "Investor Roadmap",
+      "file": "/docs/investor/investor-roadmap.pdf"
+    },
+    {
+      "title": "Investor FAQ",
+      "file": "/docs/investor/investor-faq.pdf"
+    },
+    {
+      "title": "Abbreviations Key",
+      "file": "/docs/investor/abbreviations-key.pdf"
+    }
+  ],
+  "tier2": [
+    {
+      "title": "Mutual NDA",
+      "file": "/docs/investor/mutual-nda.pdf"
+    },
+    {
+      "title": "Target Asset Preview",
+      "file": "/docs/investor/target-asset-preview.pdf",
+      "requiresNda": true
+    }
+  ]
+}

@@ -1,5 +1,13 @@
 import { NextResponse } from "next/server";
-import { insertSupabaseLead, sendLeadEmail } from "@/lib/leads";
+import {
+  NDA_PDF,
+  TIER0_PDFS,
+  TIER1_PDFS,
+  insertSupabaseLead,
+  investorPackEmailHtml,
+  sendLeadEmail,
+  siteBaseUrl,
+} from "@/lib/leads";
 import {
   SUITEDASH_CUSTOM_FIELDS,
   buildInvestorBackground,
@@ -22,16 +30,42 @@ type Body = {
   accredited?: string;
   message?: string;
   website?: string;
-  company_website?: string; // honeypot
+  requestTier1?: string | boolean;
+  requestNda?: string | boolean;
+  requestDataRoom?: string | boolean;
+  utm_source?: string;
+  utm_medium?: string;
+  utm_campaign?: string;
+  company_website?: string;
 };
+
+function truthy(v: unknown) {
+  return v === true || v === "true" || v === "on" || v === "1" || v === "yes";
+}
+
+function scoreLead(input: {
+  checkSize?: string;
+  timeline?: string;
+  accredited?: string;
+}) {
+  let score = 0;
+  const cs = (input.checkSize || "").toLowerCase();
+  if (cs.includes("500")) score += 3;
+  else if (cs.includes("250")) score += 2;
+  else if (cs.includes("100")) score += 1;
+  const tl = (input.timeline || "").toLowerCase();
+  if (tl.includes("0–30") || tl.includes("0-30")) score += 2;
+  else if (tl.includes("30–90") || tl.includes("30-90")) score += 1;
+  if ((input.accredited || "").toLowerCase() === "yes") score += 2;
+  if (score >= 5) return "hot";
+  if (score >= 3) return "warm";
+  return "cold";
+}
 
 export async function POST(req: Request) {
   try {
     const body = (await req.json()) as Body;
-
-    if (body.company_website) {
-      return NextResponse.json({ ok: true });
-    }
+    if (body.company_website) return NextResponse.json({ ok: true });
 
     let firstName = (body.firstName || "").trim();
     let lastName = (body.lastName || "").trim();
@@ -50,6 +84,10 @@ export async function POST(req: Request) {
     const accredited = (body.accredited || "").trim();
     const message = (body.message || "").trim();
     const website = (body.website || "").trim();
+    const requestTier1 =
+      truthy(body.requestTier1) || accredited.toLowerCase() === "yes";
+    const requestNda = truthy(body.requestNda) || truthy(body.requestDataRoom);
+    const heat = scoreLead({ checkSize, timeline, accredited });
 
     if (!firstName || !email || !message) {
       return NextResponse.json(
@@ -60,6 +98,7 @@ export async function POST(req: Request) {
 
     const fullName = [firstName, lastName].filter(Boolean).join(" ");
     const sourceSite = process.env.LEAD_SOURCE_SITE || "megalodomegolf.com";
+    const baseUrl = siteBaseUrl();
     const background = buildInvestorBackground({
       message,
       investorType,
@@ -70,7 +109,20 @@ export async function POST(req: Request) {
       page: "/invest/apply",
     });
 
-    // 1) SuiteDash CRM Lead
+    const tags = [
+      "investor",
+      "website",
+      "source:megalodomegolf.com",
+      `score:${heat}`,
+      investorType
+        ? `type:${investorType.toLowerCase().replace(/\s+/g, "-")}`
+        : "",
+      requestTier1 ? "pack:tier1" : "pack:tier0",
+      requestNda ? "nda-requested" : "",
+      body.utm_source ? `utm:${body.utm_source}` : "",
+    ].filter(Boolean);
+
+    // 1) SuiteDash
     let suitedashUid: string | null = null;
     let suitedashError: string | null = null;
     try {
@@ -82,15 +134,17 @@ export async function POST(req: Request) {
       if (investorType) {
         customFields[SUITEDASH_CUSTOM_FIELDS.positionTitle] = investorType;
       }
-      if (message) {
-        customFields[SUITEDASH_CUSTOM_FIELDS.additionalInfo] = [
-          `Check size: ${checkSize || "—"}`,
-          `Timeline: ${timeline || "—"}`,
-          `Accredited: ${accredited || "—"}`,
-          "",
-          message,
-        ].join("\n");
-      }
+      customFields[SUITEDASH_CUSTOM_FIELDS.additionalInfo] = [
+        `Check size: ${checkSize || "—"}`,
+        `Timeline: ${timeline || "—"}`,
+        `Accredited: ${accredited || "—"}`,
+        `Score: ${heat}`,
+        `Tier1 pack: ${requestTier1 ? "yes" : "no"}`,
+        `NDA requested: ${requestNda ? "yes" : "no"}`,
+        `UTM: ${body.utm_source || ""}/${body.utm_medium || ""}/${body.utm_campaign || ""}`,
+        "",
+        message,
+      ].join("\n");
 
       const contact = await createSuiteDashContact({
         firstName,
@@ -102,12 +156,7 @@ export async function POST(req: Request) {
         website: website || undefined,
         backgroundInfo: background,
         role: "Lead",
-        tags: [
-          "investor",
-          "website",
-          "source:megalodomegolf.com",
-          investorType ? `type:${investorType.toLowerCase().replace(/\s+/g, "-")}` : "",
-        ].filter(Boolean),
+        tags,
         circlesToAdd: ["Investors"],
         customFields,
         sendWelcomeEmail: false,
@@ -118,7 +167,7 @@ export async function POST(req: Request) {
       console.error("suitedash invest error", err);
     }
 
-    // 2) Supabase archive
+    // 2) Supabase
     await insertSupabaseLead({
       source_site: sourceSite,
       source_page: "/invest/apply",
@@ -131,22 +180,70 @@ export async function POST(req: Request) {
       company: company || null,
       lead_type: "investor",
       message,
-      status: "new",
+      status: requestNda ? "nda_requested" : "new",
       metadata: {
         investorType,
         checkSize,
         timeline,
         accredited,
         website,
+        heat,
+        requestTier1,
+        requestNda,
         suitedashUid,
         suitedashError,
+        utm_source: body.utm_source || null,
+        utm_medium: body.utm_medium || null,
+        utm_campaign: body.utm_campaign || null,
         userAgent: req.headers.get("user-agent"),
       },
     });
 
-    // 3) Email notify
+    // 3) Email pack to investor
+    const attach = [...TIER0_PDFS];
+    if (requestTier1) attach.push(...TIER1_PDFS);
+    if (requestNda) attach.push(NDA_PDF);
+
+    let investorEmailAttached = 0;
+    try {
+      const result = await sendLeadEmail({
+        to: email,
+        subject: requestNda
+          ? "MEGALODOME GOLF — Investor pack + Mutual NDA"
+          : requestTier1
+            ? "MEGALODOME GOLF — Investor pre-meeting pack"
+            : "MEGALODOME GOLF — Investor introduction materials",
+        replyTo:
+          process.env.LEAD_NOTIFY_EMAIL ||
+          process.env.RESEND_FROM_EMAIL ||
+          "hello@megalodomegolf.com",
+        text: [
+          `Dear ${firstName},`,
+          "",
+          "Thank you for your interest in MEGALODOME GOLF Equity Fund I.",
+          "Your materials are attached.",
+          "",
+          `${baseUrl}/invest`,
+          `${baseUrl}/invest/data-room`,
+          "",
+          "CONFIDENTIAL — accredited investors only. Not an offer to sell securities.",
+        ].join("\n"),
+        html: investorPackEmailHtml({
+          name: firstName,
+          baseUrl,
+          includeTier1: requestTier1,
+          includeNda: requestNda,
+        }),
+        attachPaths: attach,
+      });
+      investorEmailAttached = result.sent ? result.attached || 0 : 0;
+    } catch (err) {
+      console.error("investor pack email failed", err);
+    }
+
+    // 4) Notify raise team
     await sendLeadEmail({
-      subject: `New INVESTOR lead — ${fullName}${checkSize ? ` (${checkSize})` : ""}`,
+      subject: `${heat.toUpperCase()} INVESTOR — ${fullName}${checkSize ? ` (${checkSize})` : ""}${requestNda ? " · NDA REQUEST" : ""}`,
       replyTo: email,
       text: [
         "NEW INVESTOR INQUIRY",
@@ -155,13 +252,17 @@ export async function POST(req: Request) {
         `Email: ${email}`,
         `Phone: ${phone || "—"}`,
         `Company: ${company || "—"}`,
-        `Investor type: ${investorType || "—"}`,
+        `Type: ${investorType || "—"}`,
         `Check size: ${checkSize || "—"}`,
         `Timeline: ${timeline || "—"}`,
         `Accredited: ${accredited || "—"}`,
-        `Website: ${website || "—"}`,
+        `Score: ${heat}`,
+        `Tier1 pack sent: ${requestTier1}`,
+        `NDA requested: ${requestNda}`,
+        `Attachments to investor: ${investorEmailAttached}`,
         `SuiteDash UID: ${suitedashUid || "FAILED"}`,
         suitedashError ? `SuiteDash error: ${suitedashError}` : "",
+        `UTM: ${body.utm_source || ""} / ${body.utm_medium || ""} / ${body.utm_campaign || ""}`,
         "",
         message,
       ]
@@ -169,16 +270,13 @@ export async function POST(req: Request) {
         .join("\n"),
     });
 
-    // If SuiteDash hard-failed and we still saved Supabase, return ok with warning path
-    if (!suitedashUid && suitedashError) {
-      // still success for user — lead captured in Supabase + email
-      return NextResponse.json({
-        ok: true,
-        warning: "crm_sync_delayed",
-      });
-    }
-
-    return NextResponse.json({ ok: true, suitedashUid });
+    return NextResponse.json({
+      ok: true,
+      suitedashUid,
+      heat,
+      pack: requestTier1 ? "tier1" : "tier0",
+      nda: requestNda,
+    });
   } catch (err) {
     console.error("invest error", err);
     return NextResponse.json(
