@@ -9,17 +9,17 @@ export const metadata: Metadata = {
 
 const features = [
   {
-    img: "/images/gallery/render-05.jpg",
+    img: "/images/gallery/render-02.jpg",
     title: "Par 3 Holes",
     body: "100–160 yards with undulating greens, bunkers and water hazards. Design by Huxham Golf Design Inc.",
   },
   {
-    img: "/images/gallery/render-04.jpg",
+    img: "/images/gallery/render-09.jpg",
     title: "Par 4 Holes",
     body: "Arizona-style layout with three par-4s at 270–280 yards — defended greens for long hitters.",
   },
   {
-    img: "/images/gallery/render-01.jpg",
+    img: "/images/gallery/render-14.jpg",
     title: "Water & desert drama",
     body: "Lakes, rockwork, palms, and waste areas create a true destination experience inside the domes.",
   },
