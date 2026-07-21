@@ -161,8 +161,8 @@ export async function POST(req: Request) {
         role: "Lead",
         tags,
         circlesToAdd: [
-          SUITEDASH_RECOMMENDED.circles.investors,
-          SUITEDASH_RECOMMENDED.circles.websiteLeads,
+          SUITEDASH_RECOMMENDED.circleIds.investors,
+          SUITEDASH_RECOMMENDED.circleIds.websiteLeads,
         ],
         customFields,
         sendWelcomeEmail: false,

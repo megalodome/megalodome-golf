@@ -4,6 +4,7 @@ import {
   buildInvestorBackground,
   createSuiteDashContact,
   splitName,
+  SUITEDASH_RECOMMENDED,
 } from "@/lib/suitedash";
 
 export const runtime = "nodejs";
@@ -57,7 +58,7 @@ export async function POST(req: Request) {
         "path:contact",
         `interest:${interest || "general"}`,
       ];
-      const circles: string[] = ["Website Leads"];
+      const circles: string[] = [SUITEDASH_RECOMMENDED.circleIds.websiteLeads];
       if (isInvestor) {
         tags.push(
           "investor",
@@ -65,15 +66,15 @@ export async function POST(req: Request) {
           "stage:new-inquiry",
           "fund:equity-fund-i"
         );
-        circles.push("Investors");
+        circles.push(SUITEDASH_RECOMMENDED.circleIds.investors);
       }
       if (isMedia) {
         tags.push("media");
-        circles.push("Media");
+        circles.push(SUITEDASH_RECOMMENDED.circleIds.media);
       }
       if (isPartner) {
         tags.push("partner");
-        circles.push("Partners");
+        circles.push(SUITEDASH_RECOMMENDED.circleIds.partners);
       }
 
       const contact = await createSuiteDashContact({

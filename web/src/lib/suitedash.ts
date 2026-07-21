@@ -34,8 +34,16 @@ export const SUITEDASH_RECOMMENDED = {
     media: "Media",
     partners: "Partners",
   },
+  /** SuiteDash circle IDs (app.megalodomegolf.com) — preferred for API add */
+  circleIds: {
+    investors: "822568",
+    websiteLeads: "822569",
+    media: "822570",
+    partners: "822571",
+  },
   pipeline: "Investor Raise",
   dealGenerator: "Website Investor Lead",
+  dealGeneratorId: "1267",
   stages: [
     "New Inquiry",
     "Info Pack Sent",
