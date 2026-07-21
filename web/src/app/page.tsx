@@ -9,19 +9,19 @@ export const metadata: Metadata = {
 
 const features = [
   {
-    img: "/images/gallery/holes-9-12.jpg",
+    img: "/images/gallery/render-05.jpg",
     title: "Par 3 Holes",
     body: "100–160 yards with undulating greens, bunkers and water hazards. Design by Huxham Golf Design Inc.",
   },
   {
-    img: "/images/gallery/arizona-layout.jpg",
+    img: "/images/gallery/render-04.jpg",
     title: "Par 4 Holes",
     body: "Arizona-style layout with three par-4s at 270–280 yards — defended greens for long hitters.",
   },
   {
-    img: "/images/gallery/apex.jpg",
-    title: "Practice Facility",
-    body: "Fourth dome: 50 stalls over 275+ yards, short-game areas, bunkers, and simulator stations.",
+    img: "/images/gallery/render-01.jpg",
+    title: "Water & desert drama",
+    body: "Lakes, rockwork, palms, and waste areas create a true destination experience inside the domes.",
   },
 ];
 
@@ -77,8 +77,8 @@ export default function HomePage() {
           </div>
           <div className="card">
             <Image
-              src="/images/gallery/three-domes-summer.jpg"
-              alt="Dome exterior"
+              src="/images/gallery/render-03.jpg"
+              alt="Indoor Arizona-style green under the MEGALODOME canopy"
               width={1200}
               height={900}
               className="h-auto w-full object-cover"

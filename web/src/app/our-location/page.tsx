@@ -17,8 +17,8 @@ export default function LocationPage() {
         <div className="container grid items-start gap-8 lg:grid-cols-2">
           <div className="card">
             <Image
-              src="/images/clubhouse.jpg"
-              alt="Clubhouse and domes"
+              src="/images/gallery/render-08.jpg"
+              alt="Aerial view of the indoor desert golf course"
               width={1200}
               height={900}
               className="h-auto w-full object-cover"

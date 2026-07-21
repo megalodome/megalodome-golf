@@ -20,8 +20,8 @@ export default function AboutPage() {
           </div>
           <div className="card">
             <Image
-              src="/images/new-era.jpg"
-              alt="New era of golf"
+              src="/images/gallery/render-05.jpg"
+              alt="Players on a MEGALODOME green"
               width={1000}
               height={1200}
               className="h-full w-full object-cover"
