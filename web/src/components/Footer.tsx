@@ -33,23 +33,26 @@ export function Footer() {
             <Link href="/invest">Investors</Link>
             <Link href="/invest/apply">Investor inquiry</Link>
             <Link href="/contact">Contact</Link>
-            <a href={site.flyerPath} target="_blank" rel="noreferrer">
-                          Flyer / Advertorial (PDF)
-                        </a>
-                        {site.fullPageAds.map((ad) => (
-                          <a key={ad.href} href={ad.href} target="_blank" rel="noreferrer">
-                            {ad.label}
-                          </a>
-                        ))}
-                        <Link href="/privacy">Privacy Policy</Link>
+            <Link href="/media-kit">Media Kit</Link>
           </div>
         </div>
       </div>
       <div className="border-t border-[var(--line)] py-4">
         <div className="container flex flex-col gap-2 text-sm text-[var(--muted)] sm:flex-row sm:items-center sm:justify-between">
-          <span>
-            Copyright © {new Date().getFullYear()} MEGALODOME GOLF — All Rights
-            Reserved.
+          <span className="flex flex-wrap items-center gap-x-3 gap-y-1">
+            <span>
+              Copyright © {new Date().getFullYear()} MEGALODOME GOLF — All
+              Rights Reserved.
+            </span>
+            <span className="hidden text-[rgba(238,220,167,0.35)] sm:inline">
+              ·
+            </span>
+            <Link
+              href="/privacy"
+              className="text-[var(--muted)] transition hover:text-[var(--gold)]"
+            >
+              Privacy Policy
+            </Link>
           </span>
           <span>Target opening: {site.openTarget}</span>
         </div>

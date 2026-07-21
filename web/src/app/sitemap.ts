@@ -16,6 +16,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/invest/apply",
     "/team",
     "/news",
+    "/media-kit",
     "/faq",
     "/contact",
     "/privacy",
