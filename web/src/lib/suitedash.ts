@@ -100,10 +100,14 @@ export function investorCrmPlaybookNote(extra?: string): string {
 }
 
 function baseUrl() {
-  return (
-    process.env.SUITEDASH_BASE_URL ||
-    "https://app.suitedash.com/secure-api"
+  let u = (
+    process.env.SUITEDASH_BASE_URL || "https://app.suitedash.com/secure-api"
   ).replace(/\/$/, "");
+  // Accept either host root or full .../secure-api
+  if (!/\/secure-api$/i.test(u)) {
+    u = `${u}/secure-api`;
+  }
+  return u;
 }
 
 function authHeaders() {

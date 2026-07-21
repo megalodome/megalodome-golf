@@ -42,37 +42,63 @@ export async function POST(req: Request) {
 
     const sourceSite = process.env.LEAD_SOURCE_SITE || "megalodomegolf.com";
     const isInvestor = interest.toLowerCase() === "investor";
+    const isMedia = interest.toLowerCase() === "media";
+    const isPartner =
+      interest.toLowerCase() === "partner" ||
+      interest.toLowerCase() === "partnership";
 
     let suitedashUid: string | null = null;
-    if (isInvestor || process.env.SUITEDASH_SYNC_ALL_CONTACTS === "1") {
-      try {
-        const { firstName, lastName } = splitName(name);
-        const contact = await createSuiteDashContact({
-          firstName,
-          lastName,
-          email,
-          phone: phone || undefined,
-          company: company || undefined,
-          title: isInvestor ? "Investor" : interest,
-          role: "Lead",
-          tags: isInvestor
-            ? ["investor", "website", "source:megalodomegolf.com", "path:contact"]
-            : ["website", "source:megalodomegolf.com", `interest:${interest}`],
-          circlesToAdd: isInvestor ? ["Investors"] : undefined,
-          backgroundInfo: isInvestor
-            ? buildInvestorBackground({
-                message,
-                investorType: "contact-form",
-                source: sourceSite,
-                page: "/contact",
-              })
-            : `Website contact (${interest})\n\n${message}`,
-          sendWelcomeEmail: false,
-        });
-        suitedashUid = contact.uid;
-      } catch (err) {
-        console.error("suitedash contact sync error", err);
+    // Always sync website form leads into CRM so automations/tags/circles apply.
+    try {
+      const { firstName, lastName } = splitName(name);
+      const tags = [
+        "website",
+        "source:megalodomegolf.com",
+        "path:contact",
+        `interest:${interest || "general"}`,
+      ];
+      const circles: string[] = ["Website Leads"];
+      if (isInvestor) {
+        tags.push(
+          "investor",
+          "pipeline:investor-raise",
+          "stage:new-inquiry",
+          "fund:equity-fund-i"
+        );
+        circles.push("Investors");
       }
+      if (isMedia) {
+        tags.push("media");
+        circles.push("Media");
+      }
+      if (isPartner) {
+        tags.push("partner");
+        circles.push("Partners");
+      }
+
+      const contact = await createSuiteDashContact({
+        firstName,
+        lastName,
+        email,
+        phone: phone || undefined,
+        company: company || undefined,
+        title: isInvestor ? "Investor" : interest,
+        role: "Lead",
+        tags,
+        circlesToAdd: circles,
+        backgroundInfo: isInvestor
+          ? buildInvestorBackground({
+              message,
+              investorType: "contact-form",
+              source: sourceSite,
+              page: "/contact",
+            })
+          : `Website contact (${interest})\n\n${message}`,
+        sendWelcomeEmail: false,
+      });
+      suitedashUid = contact.uid;
+    } catch (err) {
+      console.error("suitedash contact sync error", err);
     }
 
     await insertSupabaseLead({
