@@ -174,7 +174,7 @@ export default function HomePage() {
                 Investor Portal
               </Link>
               <a href={site.flyerPath} className="btn btn-secondary" target="_blank" rel="noreferrer">
-                2026 Flyer
+                Flyer / Advertorial
               </a>
             </div>
           </div>

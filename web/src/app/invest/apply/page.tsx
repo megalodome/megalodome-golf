@@ -47,7 +47,7 @@ export default function InvestApplyPage() {
               </p>
               <p className="mt-2">
                 <a className="text-[var(--gold)]" href={site.flyerPath}>
-                  Marketing flyer PDF
+                  Flyer / Advertorial PDF
                 </a>
               </p>
             </div>

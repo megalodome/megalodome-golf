@@ -68,7 +68,7 @@ export default function InvestPage() {
                   target="_blank"
                   rel="noreferrer"
                 >
-                  2026 flyer PDF
+                  Flyer / Advertorial PDF
                 </a>
               </div>
             </div>

@@ -34,7 +34,7 @@ export function Footer() {
             <Link href="/invest/apply">Investor inquiry</Link>
             <Link href="/contact">Contact</Link>
             <a href={site.flyerPath} target="_blank" rel="noreferrer">
-              2026 Flyer (PDF)
+              Flyer / Advertorial (PDF)
             </a>
             <Link href="/privacy">Privacy Policy</Link>
           </div>

@@ -44,7 +44,7 @@ export default function ContactPage() {
               <p>
                 <strong className="text-white">Investor packet:</strong>{" "}
                 <a className="text-[var(--gold)]" href={site.flyerPath}>
-                  Download 2026 flyer PDF
+                  Download flyer / advertorial PDF
                 </a>
               </p>
               <p>

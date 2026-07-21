@@ -45,7 +45,7 @@ export default function InvestThankYouPage() {
               target="_blank"
               rel="noreferrer"
             >
-              Flyer PDF
+              Flyer / Advertorial
             </a>
             <Link href="/invest/data-room" className="btn btn-secondary">
               Data room
