@@ -1,6 +1,11 @@
+## Domain cutover
+
+Custom SuiteDash domain: `app.megalodomegolf.com` → CNAME `secure.clientportal.solutions` (DNS only).
+Legacy host `app.onecommercial.ca` may still work during transition.
+
 # MEGALODOME — SuiteDash / ONE portals, onboarding & CRM setup
 
-**Workspace:** https://app.onecommercial.ca  
+**Workspace / login host:** https://app.megalodomegolf.com  
 **Date:** 2026-07-21  
 **Public site:** https://megalodome-golf.vercel.app  
 
@@ -20,7 +25,7 @@
 | **Deal pipelines** | CRM → Deals → Pipelines | Investor Raise stages |
 | **Deal generators** | CRM → Deals → Generators | Auto-create deals from forms/tags |
 | **Booking** | Calendar → Generators + Forms booking | Investor Discovery 20-min (done) |
-| **Custom login URL** | Settings → Custom URL & Login | `app.onecommercial.ca` already set |
+| **Custom login URL** | Settings → Custom URL & Login | `app.megalodomegolf.com` already set |
 
 ### Public pages — do we need them?
 **Mostly no for marketing.** The Next.js site is the public front door.  
@@ -37,7 +42,7 @@ Use SuiteDash Public Pages only for:
 
 ### Booking (prior + confirmed)
 - Appointment generator: **Investor Discovery — 20 min** (Active)
-- Booking form: https://app.onecommercial.ca/frm/2rWPC5u8yME2svA8N
+- Booking form: https://app.megalodomegolf.com/frm/2rWPC5u8yME2svA8N
 
 ### Portal pages created (draft shells — need body publish polish)
 | Page | ID | Audience intent |
@@ -49,12 +54,12 @@ Use SuiteDash Public Pages only for:
 | Staff Playbooks | 171469 | Staff |
 | Raise Desk | 171470 | Staff |
 
-Admin: https://app.onecommercial.ca/portal/dashboard/admin  
+Admin: https://app.megalodomegolf.com/portal/dashboard/admin  
 
 > **Blocker:** SuiteDash requires **Page Content** via its block/editor (`PortalPage[body]` / editorType). Automation set model fields but the visual editor still flags “Page Content is required”. Open each page → paste content → Save (content drafts prepared in `reports/suitedash_ui` scripts / below).
 
 ### Pipeline (pending UI item — DONE)
-- **Investor Raise** pipeline created: https://app.onecommercial.ca/crmDealsPipelines/94908  
+- **Investor Raise** pipeline created: https://app.megalodomegolf.com/crmDealsPipelines/94908  
 - Default stages present: Qualified → Contact Made → Demo Scheduled → Proposal Made → Negotiations Started  
 - **Rename stages** (manual 2 min) to raise taxonomy:
   1. New Inquiry  
@@ -68,13 +73,13 @@ Admin: https://app.onecommercial.ca/portal/dashboard/admin
 
 ### Onboarding FLOW shells
 Manage URLs created (open, title, attach checklist steps in UI):
-- Investor: https://app.onecommercial.ca/flw/t/DkCywS367jeHpxH  
-- Staff: https://app.onecommercial.ca/flw/t/ESt76HptnNiPWdQ  
+- Investor: https://app.megalodomegolf.com/flw/t/DkCywS367jeHpxH  
+- Staff: https://app.megalodomegolf.com/flw/t/ESt76HptnNiPWdQ  
 - Existing: Welcome Aboard!, Untitled FLOW  
 
 ### Checklist shells
-- https://app.onecommercial.ca/cl/u/R76aUuaCy11Ba3H (Investor)  
-- https://app.onecommercial.ca/cl/u/RMbFH4R4U7oJYiC (Staff)  
+- https://app.megalodomegolf.com/cl/u/R76aUuaCy11Ba3H (Investor)  
+- https://app.megalodomegolf.com/cl/u/RMbFH4R4U7oJYiC (Staff)  
 > List view may not show until title/items fully saved via UI — open URLs above and click Save.
 
 ### Circles — partial
@@ -84,7 +89,7 @@ Manage URLs created (open, title, attach checklist steps in UI):
   Path: CRM → Circles → ADD CIRCLE → name + color → Add  
 
 ### Deal generator — not yet saved
-- UI path works: https://app.onecommercial.ca/crmDealGenerator/admin → ADD DEAL GENERATOR  
+- UI path works: https://app.megalodomegolf.com/crmDealGenerator/admin → ADD DEAL GENERATOR  
 - Create **Website Investor Lead**:
   - Reference Title: `Website Investor Lead`
   - Deal Title: `Investor — {first_name} {last_name}` (or static `Website Investor Lead`)
@@ -127,8 +132,8 @@ Internal CRM ops, brand rules, daily raise checklist.
 
 Live: https://megalodome-golf.vercel.app/login  
 
-Staff login URL: https://app.onecommercial.ca/site/login  
-Investor login URL: https://app.onecommercial.ca/site/login  
+Staff login URL: https://app.megalodomegolf.com/site/login  
+Investor login URL: https://app.megalodomegolf.com/site/login  
 (After invite, same gate; portal pages differ by assignment.)
 
 ---
@@ -176,8 +181,8 @@ Public web (Next.js)
   ├─ Marketing pages
   ├─ /invest + apply + booking CTA
   └─ /login  → chooser
-         ├─ Staff → app.onecommercial.ca/site/login → Staff dashboard + Staff portal pages
-         └─ Investor → app.onecommercial.ca/site/login → Investor portal pages (after invite)
+         ├─ Staff → app.megalodomegolf.com/site/login → Staff dashboard + Staff portal pages
+         └─ Investor → app.megalodomegolf.com/site/login → Investor portal pages (after invite)
 
 ONE / SuiteDash
   ├─ CRM + Investor Raise pipeline
