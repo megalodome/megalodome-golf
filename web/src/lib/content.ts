@@ -36,10 +36,6 @@ export const nav: NavItem[] = [
 ];
 
 export const footerExplore = [
-  { href: "/our-mission", label: "Mission" },
-  { href: "/our-location", label: "Location" },
-  { href: "/team", label: "Team" },
-  { href: "/about", label: "More" },
   { href: "/pictures", label: "Gallery" },
   { href: "/invest", label: "Investors" },
   { href: "/news", label: "News" },
