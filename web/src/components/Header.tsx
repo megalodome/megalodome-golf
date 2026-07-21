@@ -30,14 +30,20 @@ export function Header() {
     setMobileAboutOpen(false);
   }, [pathname]);
 
+  // Close desktop About submenu only when clicking outside it
   useEffect(() => {
-    function onDocClick(e: MouseEvent) {
-      if (!aboutRef.current?.contains(e.target as Node)) {
+    function onDocPointerDown(e: MouseEvent | TouchEvent) {
+      const target = e.target as Node;
+      if (!aboutRef.current?.contains(target)) {
         setAboutOpen(false);
       }
     }
-    document.addEventListener("click", onDocClick);
-    return () => document.removeEventListener("click", onDocClick);
+    document.addEventListener("mousedown", onDocPointerDown);
+    document.addEventListener("touchstart", onDocPointerDown);
+    return () => {
+      document.removeEventListener("mousedown", onDocPointerDown);
+      document.removeEventListener("touchstart", onDocPointerDown);
+    };
   }, []);
 
   return (
@@ -54,32 +60,42 @@ export function Header() {
           />
         </Link>
 
-        {/* Desktop nav — full width links, no top-right CTA button */}
         <nav className="hidden flex-1 items-center justify-end lg:flex">
           {nav.map((item) => {
             const active = isActive(pathname, item);
 
             if (item.children?.length) {
               return (
-                <div key={item.label} className="relative" ref={aboutRef}>
+                <div
+                  key={item.label}
+                  className="relative"
+                  ref={aboutRef}
+                  onMouseEnter={() => setAboutOpen(true)}
+                >
                   <button
                     type="button"
                     className={`flex items-center gap-1 px-2.5 py-2 text-[0.68rem] font-semibold uppercase tracking-[0.12em] transition ${
-                      active
+                      active || aboutOpen
                         ? "text-[var(--gold)]"
                         : "text-[var(--text)] hover:text-[var(--gold)]"
                     }`}
                     aria-expanded={aboutOpen}
+                    aria-haspopup="menu"
+                    onFocus={() => setAboutOpen(true)}
                     onClick={(e) => {
-                      e.stopPropagation();
-                      setAboutOpen((v) => !v);
+                      // Keep open on click of label; outside click closes
+                      e.preventDefault();
+                      setAboutOpen(true);
                     }}
                   >
                     {item.label}
                     <span className="text-[0.55rem] opacity-70">▾</span>
                   </button>
                   {aboutOpen ? (
-                    <div className="absolute left-0 top-full z-50 min-w-[11rem] border border-[rgba(238,220,167,0.18)] bg-[rgba(10,10,10,0.98)] py-2 shadow-xl backdrop-blur-md">
+                    <div
+                      role="menu"
+                      className="absolute left-0 top-full z-50 min-w-[11rem] border border-[rgba(238,220,167,0.18)] bg-[rgba(10,10,10,0.98)] py-2 shadow-xl backdrop-blur-md"
+                    >
                       {item.children.map((child) => {
                         const childActive =
                           pathname === child.href ||
@@ -88,12 +104,12 @@ export function Header() {
                           <Link
                             key={child.href}
                             href={child.href}
+                            role="menuitem"
                             className={`block px-4 py-2.5 text-[0.68rem] font-semibold uppercase tracking-[0.12em] transition ${
                               childActive
                                 ? "text-[var(--gold)]"
                                 : "text-[var(--text)] hover:bg-white/5 hover:text-[var(--gold)]"
                             }`}
-                            onClick={() => setAboutOpen(false)}
                           >
                             {child.label}
                           </Link>
@@ -121,7 +137,6 @@ export function Header() {
           })}
         </nav>
 
-        {/* Mobile: icon-only toggle (no Menu / Investors buttons) */}
         <button
           type="button"
           className="inline-flex h-10 w-10 items-center justify-center border border-[rgba(238,220,167,0.25)] text-[var(--gold)] lg:hidden"
