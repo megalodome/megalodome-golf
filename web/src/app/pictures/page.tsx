@@ -4,7 +4,7 @@ import { PageHero } from "@/components/PageHero";
 
 export const metadata: Metadata = { title: "Gallery" };
 
-/** MEGALODOME course renders + select concept assets */
+/** MEGALODOME course renders */
 const gallery = [
   {
     src: "/images/gallery/render-01.jpg",
@@ -15,28 +15,12 @@ const gallery = [
     alt: "Fairway approach with bunker, rocks, and palms",
   },
   {
-    src: "/images/gallery/render-05.jpg",
-    alt: "Green complex with red flag and players",
-  },
-  {
-    src: "/images/gallery/render-03.jpg",
-    alt: "Putting green surrounded by palms and desert dunes",
-  },
-  {
     src: "/images/gallery/render-02.jpg",
     alt: "Aerial view of Arizona-style holes under the dome canopy",
   },
   {
     src: "/images/gallery/render-09.jpg",
     alt: "Golfer on the tee with turquoise water and hanging screens",
-  },
-  {
-    src: "/images/gallery/render-06.jpg",
-    alt: "Course overview with Crystal and Next Revolution branding",
-  },
-  {
-    src: "/images/gallery/render-08.jpg",
-    alt: "Wide aerial of desert interior and water feature",
   },
   {
     src: "/images/gallery/render-13.jpg",
@@ -67,24 +51,8 @@ const gallery = [
     alt: "Desert interior island with bunkers and cacti",
   },
   {
-    src: "/images/gallery/three-domes-summer.jpg",
-    alt: "Exterior dome concept — summer setting",
-  },
-  {
-    src: "/images/gallery/three-domes.jpg",
-    alt: "Multi-dome campus concept",
-  },
-  {
-    src: "/images/gallery/clubhouse.jpg",
-    alt: "Clubhouse concept",
-  },
-  {
     src: "/images/gallery/arizona-layout.jpg",
     alt: "Arizona-style course layout",
-  },
-  {
-    src: "/images/gallery/site-plan.jpg",
-    alt: "Site plan overview",
   },
 ];
 
@@ -98,7 +66,6 @@ export default function PicturesPage() {
       />
       <section className="section">
         <div className="container">
-          {/* Featured wide shot */}
           <figure className="card mb-6 overflow-hidden">
             <Image
               src="/images/gallery/render-04.jpg"
