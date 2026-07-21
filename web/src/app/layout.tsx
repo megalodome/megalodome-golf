@@ -3,6 +3,7 @@ import { Cormorant_Garamond, Montserrat } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { ScrollToTop } from "@/components/ScrollToTop";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -41,11 +42,14 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
-      <body className={`${montserrat.variable} ${cormorant.variable} antialiased`}>
+    <html lang="en" className="scroll-smooth">
+      <body
+        className={`${montserrat.variable} ${cormorant.variable} antialiased`}
+      >
         <Header />
         <main className="min-h-[70vh]">{children}</main>
         <Footer />
+        <ScrollToTop />
       </body>
     </html>
   );
