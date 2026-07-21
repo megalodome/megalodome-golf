@@ -54,7 +54,6 @@ async function loadAttachments(files: string[]) {
 
 export const TIER0_PDFS = [
   "/docs/investor/one-pager.pdf",
-  "/docs/investor/pitch-deck-summary.pdf",
   "/docs/flyer-2026.pdf",
 ];
 
@@ -123,8 +122,7 @@ export function investorPackEmailHtml(opts: {
 }) {
   const links: string[] = [
     `<li><a href="${opts.baseUrl}/docs/investor/one-pager.pdf">One-Pager</a></li>`,
-    `<li><a href="${opts.baseUrl}/docs/investor/pitch-deck-summary.pdf">Pitch Deck Summary</a></li>`,
-    `<li><a href="${opts.baseUrl}/docs/flyer-2026.pdf">2026 Marketing Flyer</a></li>`,
+    `<li><a href="${opts.baseUrl}/docs/flyer-2026.pdf">Flyer / Advertorial</a></li>`,
   ];
   if (opts.includeTier1) {
     links.push(
