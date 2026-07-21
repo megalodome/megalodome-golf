@@ -7,6 +7,11 @@ export const site = {
   hours: "6am–midnight CT, every day",
   emailNotify: process.env.LEAD_NOTIFY_EMAIL || "hello@megalodomegolf.com",
   flyerPath: "/docs/flyer-2026.pdf",
+  fullPageAds: [
+    { label: "Full-page ad — Draft A", href: "/docs/ads/full-page-ad-draft-a.pdf" },
+    { label: "Full-page ad — Draft B", href: "/docs/ads/full-page-ad-draft-b.pdf" },
+    { label: "Full-page ad — Draft C", href: "/docs/ads/full-page-ad-draft-c.pdf" },
+  ],
 };
 
 export type NavChild = { href: string; label: string };

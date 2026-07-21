@@ -110,11 +110,44 @@ export default function InvestPage() {
             ))}
           </div>
 
-          <div className="card p-6">
-            <InvestorDisclaimer />
-          </div>
-        </div>
-      </section>
-    </>
-  );
-}
+                    <div className="card p-7">
+                                <p className="section-label mb-2">Media downloads</p>
+                                <h3 className="display text-2xl text-[var(--gold-soft)] md:text-3xl">
+                                  Flyer & full-page ads
+                                </h3>
+                                <div className="divider" />
+                                <p className="muted mb-5 max-w-3xl leading-7">
+                                  Public solicitation creatives for partners and press. Download the
+                                  2-page advertorial or full-page ad drafts.
+                                </p>
+                                <div className="flex flex-wrap gap-3">
+                                  <a
+                                    href={site.flyerPath}
+                                    className="btn btn-secondary"
+                                    target="_blank"
+                                    rel="noreferrer"
+                                  >
+                                    Flyer / Advertorial
+                                  </a>
+                                  {site.fullPageAds.map((ad) => (
+                                    <a
+                                      key={ad.href}
+                                      href={ad.href}
+                                      className="btn btn-secondary"
+                                      target="_blank"
+                                      rel="noreferrer"
+                                    >
+                                      {ad.label}
+                                    </a>
+                                  ))}
+                                </div>
+                              </div>
+
+                              <div className="card p-6">
+                                <InvestorDisclaimer />
+                              </div>
+                            </div>
+                          </section>
+                        </>
+                      );
+                    }

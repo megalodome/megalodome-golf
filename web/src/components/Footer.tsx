@@ -34,9 +34,14 @@ export function Footer() {
             <Link href="/invest/apply">Investor inquiry</Link>
             <Link href="/contact">Contact</Link>
             <a href={site.flyerPath} target="_blank" rel="noreferrer">
-              Flyer / Advertorial (PDF)
-            </a>
-            <Link href="/privacy">Privacy Policy</Link>
+                          Flyer / Advertorial (PDF)
+                        </a>
+                        {site.fullPageAds.map((ad) => (
+                          <a key={ad.href} href={ad.href} target="_blank" rel="noreferrer">
+                            {ad.label}
+                          </a>
+                        ))}
+                        <Link href="/privacy">Privacy Policy</Link>
           </div>
         </div>
       </div>
