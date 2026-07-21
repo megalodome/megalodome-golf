@@ -53,33 +53,33 @@ export default function InvestPage() {
                 {h.openTarget}.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
-                              <Link href="/invest/apply" className="btn btn-primary">
-                                Start investor inquiry
-                              </Link>
-                              <a
-                                href={site.bookingUrl}
-                                className="btn btn-secondary"
-                                target="_blank"
-                                rel="noreferrer"
-                              >
-                                Book a 20-min call
-                              </a>
-                              <Link href="/invest/opportunity" className="btn btn-secondary">
-                                Read the opportunity
-                              </Link>
-                              <Link href="/invest/data-room" className="btn btn-secondary">
-                                Data room tiers
-                              </Link>
-                              <a
-                                href={site.flyerPath}
-                                className="btn btn-secondary"
-                                target="_blank"
-                                rel="noreferrer"
-                              >
-                                Flyer / Advertorial PDF
-                              </a>
-                            </div>
-
+                <Link href="/invest/apply" className="btn btn-primary">
+                  Start investor inquiry
+                </Link>
+                <a
+                  href={site.bookingUrl}
+                  className="btn btn-secondary"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Book a 20-min call
+                </a>
+                <Link href="/invest/opportunity" className="btn btn-secondary">
+                  Read the opportunity
+                </Link>
+                <Link href="/invest/data-room" className="btn btn-secondary">
+                  Data room tiers
+                </Link>
+                <a
+                  href={site.flyerPath}
+                  className="btn btn-secondary"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Flyer / Advertorial PDF
+                </a>
+              </div>
+            </div>
             <div className="card">
               <Image
                 src="/images/invest-domes.jpg"
@@ -118,44 +118,44 @@ export default function InvestPage() {
             ))}
           </div>
 
-                    <div className="card p-7">
-                                <p className="section-label mb-2">Media downloads</p>
-                                <h3 className="display text-2xl text-[var(--gold-soft)] md:text-3xl">
-                                  Flyer & full-page ads
-                                </h3>
-                                <div className="divider" />
-                                <p className="muted mb-5 max-w-3xl leading-7">
-                                  Public solicitation creatives for partners and press. Download the
-                                  2-page advertorial or full-page ads.
-                                </p>
-                                <div className="flex flex-wrap gap-3">
-                                  <a
-                                    href={site.flyerPath}
-                                    className="btn btn-secondary"
-                                    target="_blank"
-                                    rel="noreferrer"
-                                  >
-                                    Flyer / Advertorial
-                                  </a>
-                                  {site.fullPageAds.map((ad) => (
-                                    <a
-                                      key={ad.href}
-                                      href={ad.href}
-                                      className="btn btn-secondary"
-                                      target="_blank"
-                                      rel="noreferrer"
-                                    >
-                                      {ad.label}
-                                    </a>
-                                  ))}
-                                </div>
-                              </div>
+          <div className="card p-7">
+            <p className="section-label mb-2">Media downloads</p>
+            <h3 className="display text-2xl text-[var(--gold-soft)] md:text-3xl">
+              Flyer & full-page ads
+            </h3>
+            <div className="divider" />
+            <p className="muted mb-5 max-w-3xl leading-7">
+              Public solicitation creatives for partners and press. Download the
+              2-page advertorial or full-page ads.
+            </p>
+            <div className="flex flex-wrap gap-3">
+              <a
+                href={site.flyerPath}
+                className="btn btn-secondary"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Flyer / Advertorial
+              </a>
+              {site.fullPageAds.map((ad) => (
+                <a
+                  key={ad.href}
+                  href={ad.href}
+                  className="btn btn-secondary"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {ad.label}
+                </a>
+              ))}
+            </div>
+          </div>
 
-                              <div className="card p-6">
-                                <InvestorDisclaimer />
-                              </div>
-                            </div>
-                          </section>
-                        </>
-                      );
-                    }
+          <div className="card p-6">
+            <InvestorDisclaimer />
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}

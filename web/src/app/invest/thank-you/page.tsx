@@ -24,45 +24,45 @@ export default function InvestThankYouPage() {
               1. Review Tier 0–1 materials
             </div>
             <div className="rounded-lg border border-[var(--line)] px-4 py-3">
-              2. Reply to book a call with the raise team
+              2. Book a 20-min discovery call with the raise team
             </div>
             <div className="rounded-lg border border-[var(--line)] px-4 py-3">
               3. Execute NDA to unlock Tier 2 data room
             </div>
           </div>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
-                      <a
-                        href={site.bookingUrl}
-                        className="btn btn-primary"
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        Book a 20-min call
-                      </a>
-                      <a
-                        href="/docs/investor/one-pager.pdf"
-                        className="btn btn-secondary"
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        One-pager PDF
-                      </a>
-                      <a
-                        href={site.flyerPath}
-                        className="btn btn-secondary"
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        Flyer / Advertorial
-                      </a>
-                      <Link href="/invest/data-room" className="btn btn-secondary">
-                        Data room
-                      </Link>
-                      <Link href="/invest" className="btn btn-secondary">
-                        Investors home
-                      </Link>
-                    </div>
-
+            <a
+              href={site.bookingUrl}
+              className="btn btn-primary"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Book a 20-min call
+            </a>
+            <a
+              href="/docs/investor/one-pager.pdf"
+              className="btn btn-secondary"
+              target="_blank"
+              rel="noreferrer"
+            >
+              One-pager PDF
+            </a>
+            <a
+              href={site.flyerPath}
+              className="btn btn-secondary"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Flyer / Advertorial
+            </a>
+            <Link href="/invest/data-room" className="btn btn-secondary">
+              Data room
+            </Link>
+            <Link href="/invest" className="btn btn-secondary">
+              Investors home
+            </Link>
+          </div>
+          <p className="muted mx-auto mt-8 max-w-xl text-xs leading-5">
             CONFIDENTIAL — accredited investors only. Not an offer to sell
             securities. Offering solely via Confidential PPM under Reg D 506(c).
           </p>
