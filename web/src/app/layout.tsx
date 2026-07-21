@@ -27,6 +27,19 @@ export const metadata: Metadata = {
   },
   description:
     "The world's first REAL indoor golf experience. Arizona-style executive 9-hole course under giant domes in Oswego, IL — year-round play.",
+  applicationName: "MEGALODOME GOLF",
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
+      { url: "/icon-512.png", sizes: "512x512", type: "image/png" },
+    ],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
+    shortcut: ["/favicon.ico"],
+  },
+  manifest: "/site.webmanifest",
   openGraph: {
     title: "MEGALODOME GOLF | THE NEXT REVOLUTION™",
     description:
@@ -35,6 +48,13 @@ export const metadata: Metadata = {
     siteName: "MEGALODOME GOLF",
     images: [{ url: "/images/hero-dome.jpg" }],
     type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: "MEGALODOME GOLF | THE NEXT REVOLUTION™",
+    description:
+      "The world's first REAL indoor golf experience — Oswego, IL flagship.",
+    images: ["/icon-512.png"],
   },
 };
 
