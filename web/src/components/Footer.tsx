@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { site } from "@/lib/content";
+import { footerExplore, site } from "@/lib/content";
 
 export function Footer() {
   return (
@@ -18,12 +18,11 @@ export function Footer() {
             Explore
           </div>
           <div className="flex flex-col gap-2 text-[var(--muted)]">
-            <Link href="/our-mission">Our Mission</Link>
-            <Link href="/our-location">Our Location</Link>
-            <Link href="/pictures">Pictures</Link>
-            <Link href="/invest">Investors</Link>
-            <Link href="/news">News</Link>
-            <Link href="/faq">FAQ</Link>
+            {footerExplore.map((item) => (
+              <Link key={item.href} href={item.href}>
+                {item.label}
+              </Link>
+            ))}
           </div>
         </div>
         <div>
@@ -31,8 +30,9 @@ export function Footer() {
             Investors & contact
           </div>
           <div className="flex flex-col gap-2 text-[var(--muted)]">
+            <Link href="/invest">Investors</Link>
             <Link href="/invest/apply">Investor inquiry</Link>
-            <Link href="/contact">Contact us</Link>
+            <Link href="/contact">Contact</Link>
             <a href={site.flyerPath} target="_blank" rel="noreferrer">
               2026 Flyer (PDF)
             </a>

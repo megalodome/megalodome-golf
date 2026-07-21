@@ -3,13 +3,13 @@ import Image from "next/image";
 import { PageHero } from "@/components/PageHero";
 import { locationFeatures, site } from "@/lib/content";
 
-export const metadata: Metadata = { title: "Our Location" };
+export const metadata: Metadata = { title: "Location" };
 
 export default function LocationPage() {
   return (
     <>
       <PageHero
-        eyebrow="Our Location"
+        eyebrow="Location"
         title={`Flagship: ${site.location}`}
         subtitle="Par 30 executive golf inside proprietary domes, plus a full practice academy and high-end clubhouse."
       />

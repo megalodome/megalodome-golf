@@ -3,7 +3,7 @@ import Image from "next/image";
 import { PageHero } from "@/components/PageHero";
 import { about } from "@/lib/content";
 
-export const metadata: Metadata = { title: "More on MEGALODOME GOLF" };
+export const metadata: Metadata = { title: "More" };
 
 export default function AboutPage() {
   return (

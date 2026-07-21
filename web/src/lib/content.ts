@@ -9,14 +9,39 @@ export const site = {
   flyerPath: "/docs/flyer-2026.pdf",
 };
 
-export const nav = [
+export type NavChild = { href: string; label: string };
+export type NavItem = {
+  href?: string;
+  label: string;
+  children?: NavChild[];
+};
+
+/** Primary site navigation */
+export const nav: NavItem[] = [
   { href: "/", label: "Home" },
-  { href: "/our-mission", label: "Our Mission" },
-  { href: "/our-location", label: "Our Location" },
-  { href: "/about", label: "More on MEGALODOME" },
-  { href: "/pictures", label: "Pictures" },
+  {
+    label: "About",
+    children: [
+      { href: "/our-mission", label: "Mission" },
+      { href: "/our-location", label: "Location" },
+      { href: "/team", label: "Team" },
+      { href: "/about", label: "More" },
+    ],
+  },
+  { href: "/pictures", label: "Gallery" },
   { href: "/invest", label: "Investors" },
+  { href: "/news", label: "News" },
+  { href: "/faq", label: "FAQ" },
+  { href: "/contact", label: "Contact" },
+];
+
+export const footerExplore = [
+  { href: "/our-mission", label: "Mission" },
+  { href: "/our-location", label: "Location" },
   { href: "/team", label: "Team" },
+  { href: "/about", label: "More" },
+  { href: "/pictures", label: "Gallery" },
+  { href: "/invest", label: "Investors" },
   { href: "/news", label: "News" },
   { href: "/faq", label: "FAQ" },
   { href: "/contact", label: "Contact" },

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { PageHero } from "@/components/PageHero";
 
-export const metadata: Metadata = { title: "Pictures" };
+export const metadata: Metadata = { title: "Gallery" };
 
 const gallery = [
   { src: "/images/gallery/three-domes.jpg", alt: "Three domes" },
@@ -25,7 +25,7 @@ export default function PicturesPage() {
   return (
     <>
       <PageHero
-        eyebrow="Pictures"
+        eyebrow="Gallery"
         title="Journey through the course and practice facility"
       />
       <section className="section">

@@ -2,13 +2,13 @@ import type { Metadata } from "next";
 import { PageHero } from "@/components/PageHero";
 import { mission } from "@/lib/content";
 
-export const metadata: Metadata = { title: "Our Mission" };
+export const metadata: Metadata = { title: "Mission" };
 
 export default function MissionPage() {
   return (
     <>
       <PageHero
-        eyebrow="Our Mission"
+        eyebrow="Mission"
         title={mission.title}
         subtitle="Extending golf to all 12 months — starting with colder climates, then heat-challenged regions."
       />
