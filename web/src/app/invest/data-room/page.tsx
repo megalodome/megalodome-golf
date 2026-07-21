@@ -108,32 +108,32 @@ export default function DataRoomPage() {
           </article>
 
           <div>
-            <div className="eyebrow mb-2">Request access</div>
-            <h2 className="display mb-4 text-3xl">Get the pack / NDA</h2>
-            <div className="grid gap-8 lg:grid-cols-[1.15fr_.85fr]">
-              <InvestorForm defaultTier1 defaultNda />
-              <div className="card h-fit p-6">
-                              <h3 className="display text-xl">What happens</h3>
-                              <ol className="muted mt-4 list-decimal space-y-3 pl-5 leading-7">
-                                <li>CRM lead created with investor tags and score</li>
-                                <li>Tier 0–1 PDFs emailed to you (if selected)</li>
-                                <li>Mutual NDA emailed if data-room access requested</li>
-                                <li>
-                                  Raise team follows up and opens Tier 2 after countersignature
-                                </li>
-                              </ol>
-                              <Link href="/invest/apply" className="btn btn-secondary mt-6">
-                                Full apply page
-                              </Link>
-                            </div>
+                      <div className="eyebrow mb-2">Request access</div>
+                      <h2 className="display mb-4 text-3xl">Get the pack / NDA</h2>
+                      <div className="grid gap-8 lg:grid-cols-[1.15fr_.85fr]">
+                        <InvestorForm defaultTier1 defaultNda />
+                        <div className="card h-fit p-6">
+                          <h3 className="display text-xl">What happens</h3>
+                          <ol className="muted mt-4 list-decimal space-y-3 pl-5 leading-7">
+                            <li>CRM lead created with investor tags and score</li>
+                            <li>Tier 0–1 PDFs emailed to you (if selected)</li>
+                            <li>Mutual NDA emailed if data-room access requested</li>
+                            <li>
+                              Raise team follows up and opens Tier 2 after countersignature
+                            </li>
+                          </ol>
+                          <Link href="/invest/apply" className="btn btn-secondary mt-6">
+                            Full apply page
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
 
-          </div>
-
-          <div className="card p-6">
-            <InvestorDisclaimer />
-          </div>
-        </div>
-      </section>
-    </>
-  );
-}
+                    <div className="card p-6">
+                      <InvestorDisclaimer />
+                    </div>
+                  </div>
+                </section>
+              </>
+            );
+          }
