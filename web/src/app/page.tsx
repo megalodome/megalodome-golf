@@ -140,12 +140,15 @@ export default function HomePage() {
           </p>
           <div className="video-wrap">
             <video
+              className="h-full w-full"
               controls
-              preload="metadata"
-              poster="/images/hero-dome.jpg"
               playsInline
+              preload="metadata"
+              poster="/images/invest-domes.jpg"
+              controlsList="nodownload"
             >
               <source src="/video/megalodome-intro.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
             </video>
           </div>
         </div>
