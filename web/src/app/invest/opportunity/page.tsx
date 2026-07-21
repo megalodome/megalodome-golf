@@ -33,7 +33,6 @@ export default function OpportunityPage() {
   const h = investor.headline;
   const exec = takeUseful(investor.execParas, 10);
   const one = takeUseful(investor.onePagerParas, 6);
-  const pf = investor.proformaSummary.filter((l) => l.includes("|") || /revenue|EBITDA|FY20/i.test(l)).slice(0, 12);
 
   return (
     <>
@@ -89,29 +88,6 @@ export default function OpportunityPage() {
               </div>
             </article>
           </div>
-
-          {pf.length ? (
-            <article className="card p-7">
-              <h2 className="display text-2xl text-[var(--gold-soft)]">
-                Pro-forma summary snapshot
-              </h2>
-              <p className="muted mt-2 text-sm">
-                Modeled estimates from the investor pro-forma summary — not guarantees.
-              </p>
-              <div className="mt-4 overflow-x-auto">
-                <div className="space-y-2 font-mono text-xs text-[var(--muted)] md:text-sm">
-                  {pf.map((row) => (
-                    <div
-                      key={row}
-                      className="rounded-lg border border-[var(--line)] bg-black/20 px-3 py-2"
-                    >
-                      {row}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </article>
-          ) : null}
 
           <div className="card p-6">
             <InvestorDisclaimer />
