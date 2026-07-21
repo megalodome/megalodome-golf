@@ -118,7 +118,7 @@ export default function InvestPage() {
                                 <div className="divider" />
                                 <p className="muted mb-5 max-w-3xl leading-7">
                                   Public solicitation creatives for partners and press. Download the
-                                  2-page advertorial or full-page ad drafts.
+                                  2-page advertorial or full-page ads.
                                 </p>
                                 <div className="flex flex-wrap gap-3">
                                   <a

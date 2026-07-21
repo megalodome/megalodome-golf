@@ -21,7 +21,7 @@ export default function NewsPage() {
             </h2>
             <div className="divider" />
             <p className="muted mb-5 max-w-3xl leading-7">
-              Full-page ad drafts and the 2-page advertorial for press and
+              Full-page ads and the 2-page advertorial for press and
               partner use.
             </p>
             <div className="flex flex-wrap gap-3">
