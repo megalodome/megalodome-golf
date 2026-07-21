@@ -135,6 +135,16 @@ export function Header() {
               </Link>
             );
           })}
+          <Link
+            href="/login"
+            className={`ml-2 border border-[rgba(238,220,167,0.35)] px-3 py-2 text-[0.68rem] font-semibold uppercase tracking-[0.12em] transition ${
+              pathname === "/login" || pathname.startsWith("/login/")
+                ? "bg-[var(--gold)] text-black"
+                : "text-[var(--gold)] hover:bg-white/5"
+            }`}
+          >
+            Login
+          </Link>
         </nav>
 
         <button
@@ -207,6 +217,13 @@ export function Header() {
                 </Link>
               );
             })}
+            <Link
+              href="/login"
+              className="border-b border-[rgba(238,220,167,0.08)] py-3 text-xs font-semibold uppercase tracking-[0.12em] text-[var(--gold)]"
+              onClick={() => setMobileOpen(false)}
+            >
+              Login
+            </Link>
           </div>
         </div>
       ) : null}

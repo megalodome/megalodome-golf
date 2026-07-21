@@ -7,16 +7,25 @@ export const site = {
   hours: "6am–midnight CT, every day",
   emailNotify: process.env.LEAD_NOTIFY_EMAIL || "hello@megalodomegolf.com",
   flyerPath: "/docs/flyer-2026.pdf",
-  /** SuiteDash / ONE booking form — 20-min investor discovery */
-  bookingUrl:
-    process.env.NEXT_PUBLIC_BOOKING_URL ||
-    "https://app.onecommercial.ca/frm/2rWPC5u8yME2svA8N",
-  fullPageAds: [
-    { label: "Full-page ad A", href: "/docs/ads/full-page-ad-a.pdf" },
-    { label: "Full-page ad B", href: "/docs/ads/full-page-ad-b.pdf" },
-    { label: "Full-page ad C", href: "/docs/ads/full-page-ad-c.pdf" },
-  ],
-};
+    /** SuiteDash / ONE booking form — 20-min investor discovery */
+    bookingUrl:
+      process.env.NEXT_PUBLIC_BOOKING_URL ||
+      "https://app.onecommercial.ca/frm/2rWPC5u8yME2svA8N",
+    /** ONE workspace login (staff + invited portal users) */
+    staffLoginUrl:
+      process.env.NEXT_PUBLIC_STAFF_LOGIN_URL ||
+      "https://app.onecommercial.ca/site/login",
+    investorLoginUrl:
+      process.env.NEXT_PUBLIC_INVESTOR_LOGIN_URL ||
+      "https://app.onecommercial.ca/site/login",
+    portalBaseUrl:
+      process.env.NEXT_PUBLIC_PORTAL_BASE_URL || "https://app.onecommercial.ca",
+    fullPageAds: [
+      { label: "Full-page ad A", href: "/docs/ads/full-page-ad-a.pdf" },
+      { label: "Full-page ad B", href: "/docs/ads/full-page-ad-b.pdf" },
+      { label: "Full-page ad C", href: "/docs/ads/full-page-ad-c.pdf" },
+    ],
+  };
 
 export type NavChild = { href: string; label: string };
 export type NavItem = {

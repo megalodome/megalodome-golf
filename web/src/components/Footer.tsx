@@ -37,6 +37,7 @@ export function Footer() {
             </a>
             <Link href="/contact">Contact</Link>
             <Link href="/media-kit">Media Kit</Link>
+            <Link href="/login">Login</Link>
           </div>
         </div>
       </div>
