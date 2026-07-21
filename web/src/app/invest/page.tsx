@@ -53,25 +53,33 @@ export default function InvestPage() {
                 {h.openTarget}.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
-                <Link href="/invest/apply" className="btn btn-primary">
-                  Start investor inquiry
-                </Link>
-                <Link href="/invest/opportunity" className="btn btn-secondary">
-                  Read the opportunity
-                </Link>
-                <Link href="/invest/data-room" className="btn btn-secondary">
-                  Data room tiers
-                </Link>
-                <a
-                  href={site.flyerPath}
-                  className="btn btn-secondary"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Flyer / Advertorial PDF
-                </a>
-              </div>
-            </div>
+                              <Link href="/invest/apply" className="btn btn-primary">
+                                Start investor inquiry
+                              </Link>
+                              <a
+                                href={site.bookingUrl}
+                                className="btn btn-secondary"
+                                target="_blank"
+                                rel="noreferrer"
+                              >
+                                Book a 20-min call
+                              </a>
+                              <Link href="/invest/opportunity" className="btn btn-secondary">
+                                Read the opportunity
+                              </Link>
+                              <Link href="/invest/data-room" className="btn btn-secondary">
+                                Data room tiers
+                              </Link>
+                              <a
+                                href={site.flyerPath}
+                                className="btn btn-secondary"
+                                target="_blank"
+                                rel="noreferrer"
+                              >
+                                Flyer / Advertorial PDF
+                              </a>
+                            </div>
+
             <div className="card">
               <Image
                 src="/images/invest-domes.jpg"

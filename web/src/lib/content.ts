@@ -7,6 +7,10 @@ export const site = {
   hours: "6am–midnight CT, every day",
   emailNotify: process.env.LEAD_NOTIFY_EMAIL || "hello@megalodomegolf.com",
   flyerPath: "/docs/flyer-2026.pdf",
+  /** SuiteDash / ONE booking form — 20-min investor discovery */
+  bookingUrl:
+    process.env.NEXT_PUBLIC_BOOKING_URL ||
+    "https://app.onecommercial.ca/frm/2rWPC5u8yME2svA8N",
   fullPageAds: [
     { label: "Full-page ad A", href: "/docs/ads/full-page-ad-a.pdf" },
     { label: "Full-page ad B", href: "/docs/ads/full-page-ad-b.pdf" },

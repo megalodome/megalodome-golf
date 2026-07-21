@@ -32,6 +32,9 @@ export function Footer() {
           <div className="flex flex-col gap-2 text-[var(--muted)]">
             <Link href="/invest">Investors</Link>
             <Link href="/invest/apply">Investor inquiry</Link>
+            <a href={site.bookingUrl} target="_blank" rel="noreferrer">
+              Book a call
+            </a>
             <Link href="/contact">Contact</Link>
             <Link href="/media-kit">Media Kit</Link>
           </div>
