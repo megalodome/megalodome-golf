@@ -74,8 +74,8 @@ export default function InvestPage() {
             </div>
             <div className="card">
               <Image
-                src="/images/hero-dome.jpg"
-                alt="MEGALODOME domes"
+                src="/images/invest-domes.jpg"
+                alt="MEGALODOME GOLF domes — summer and winter campus concept"
                 width={1200}
                 height={900}
                 className="h-auto w-full object-cover"
