@@ -44,28 +44,28 @@ export function Footer() {
       <div className="border-t border-[var(--line)] py-4">
         <div className="container flex flex-col gap-2 text-sm text-[var(--muted)] sm:flex-row sm:items-center sm:justify-between">
           <span className="flex flex-wrap items-center gap-x-3 gap-y-1">
-                      <span>
-                        Copyright © {new Date().getFullYear()} MEGALODOME GOLF — All
-                        Rights Reserved.
-                      </span>
-                      <span className="hidden text-[rgba(238,220,167,0.35)] sm:inline">
-                        ·
-                      </span>
-                      <Link
-                        href="/privacy"
-                        className="text-[var(--muted)] transition hover:text-[var(--gold)]"
-                      >
-                        Privacy Policy
-                      </Link>
-                      <span className="text-[rgba(238,220,167,0.35)]">·</span>
-                      <Link
-                        href="/terms"
-                        className="text-[var(--muted)] transition hover:text-[var(--gold)]"
-                      >
-                        Terms of Service
-                      </Link>
-                    </span>
-
+            <span>
+              Copyright © {new Date().getFullYear()} MEGALODOME GOLF — All
+              Rights Reserved.
+            </span>
+            <span className="hidden text-[rgba(238,220,167,0.35)] sm:inline">
+              ·
+            </span>
+            <Link
+              href="/privacy"
+              className="text-[var(--muted)] transition hover:text-[var(--gold)]"
+            >
+              Privacy Policy
+            </Link>
+            <span className="text-[rgba(238,220,167,0.35)]">·</span>
+            <Link
+              href="/terms"
+              className="text-[var(--muted)] transition hover:text-[var(--gold)]"
+            >
+              Terms of Service
+            </Link>
+          </span>
+          <span>Target opening: {site.openTarget}</span>
         </div>
       </div>
     </footer>
