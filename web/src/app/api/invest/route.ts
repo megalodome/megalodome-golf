@@ -122,7 +122,7 @@ export async function POST(req: Request) {
       utmSource: body.utm_source,
     });
 
-    // 1) SuiteDash
+    // 1) CRM contact
     let suitedashUid: string | null = null;
     let suitedashError: string | null = null;
     try {
@@ -169,7 +169,7 @@ export async function POST(req: Request) {
       });
       suitedashUid = contact.uid;
     } catch (err) {
-      suitedashError = err instanceof Error ? err.message : "SuiteDash failed";
+      suitedashError = err instanceof Error ? err.message : "CRM sync failed";
       console.error("suitedash invest error", err);
     }
 
@@ -266,8 +266,8 @@ export async function POST(req: Request) {
         `Tier1 pack sent: ${requestTier1}`,
         `NDA requested: ${requestNda}`,
         `Attachments to investor: ${investorEmailAttached}`,
-        `SuiteDash UID: ${suitedashUid || "FAILED"}`,
-        suitedashError ? `SuiteDash error: ${suitedashError}` : "",
+        `CRM contact ID: ${suitedashUid || "FAILED"}`,
+        suitedashError ? `CRM error: ${suitedashError}` : "",
         `UTM: ${body.utm_source || ""} / ${body.utm_medium || ""} / ${body.utm_campaign || ""}`,
         "",
         message,

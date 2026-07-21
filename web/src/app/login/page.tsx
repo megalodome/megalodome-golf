@@ -30,13 +30,13 @@ export default function LoginPage() {
             <div className="divider" />
             <p className="muted flex-1 leading-7">
               For MEGALODOME team members (raise desk, ops, leadership). Opens
-              the ONE / SuiteDash workspace — CRM, deals, booking, onboarding,
-              and internal portal pages.
+              the team workspace — CRM, deals, booking, onboarding, and internal
+              portal pages.
             </p>
             <ul className="muted mt-4 list-disc space-y-2 pl-5 text-sm leading-6">
               <li>CRM contacts, circles, Investor Raise pipeline</li>
               <li>Staff HQ / Playbooks / Raise Desk pages</li>
-              <li>Staff onboarding FLOW + checklist</li>
+              <li>Staff onboarding checklist</li>
             </ul>
             <a
               href={staffLogin}
@@ -61,7 +61,7 @@ export default function LoginPage() {
             </p>
             <ul className="muted mt-4 list-disc space-y-2 pl-5 text-sm leading-6">
               <li>Investor Home / Data Room / Next Steps</li>
-              <li>Onboarding checklist + FLOW</li>
+              <li>Onboarding checklist</li>
               <li>Book a 20-min discovery call anytime</li>
             </ul>
             <div className="mt-8 flex flex-wrap gap-3">
@@ -94,13 +94,11 @@ export default function LoginPage() {
                 investor inquiry
               </Link>{" "}
               first — portal invites are issued by the raise team. Staff: ask an
-              admin to send a staff invite from ONE → Manage Staff.
+              admin to send a staff invite from the team workspace.
             </p>
             <p className="muted mt-3 text-sm leading-6">
-              Public marketing site stays open without login. SuiteDash{" "}
-              <strong className="text-[var(--gold-soft)]">Public Pages</strong>{" "}
-              are optional (login branding / error pages only) — the Next.js site
-              remains the public front door.
+              The public marketing site stays open without login. Portal access
+              is for invited staff and investors only.
             </p>
           </div>
         </div>

@@ -102,7 +102,7 @@ export async function POST(req: Request) {
         `Phone: ${phone || "—"}`,
         `Company: ${company || "—"}`,
         `Interest: ${interest}`,
-        suitedashUid ? `SuiteDash UID: ${suitedashUid}` : "",
+        suitedashUid ? `CRM contact ID: ${suitedashUid}` : "",
         "",
         message,
       ]
