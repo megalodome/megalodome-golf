@@ -19,13 +19,13 @@ export const site = {
       process.env.NEXT_PUBLIC_VENDOR_FORM_URL ||
       "https://app.megalodomegolf.com/partners",
     /** Team / investor portal login */
+    staffLoginUrl:
+      process.env.NEXT_PUBLIC_STAFF_LOGIN_URL ||
+      "https://app.megalodomegolf.com/site/login",
+    investorLoginUrl:
+      process.env.NEXT_PUBLIC_INVESTOR_LOGIN_URL ||
+      "https://app.megalodomegolf.com/site/login",
 
-    process.env.NEXT_PUBLIC_STAFF_LOGIN_URL ||
-    "https://app.megalodomegolf.com/site/login",
-  investorLoginUrl:
-    process.env.NEXT_PUBLIC_INVESTOR_LOGIN_URL ||
-    "https://app.megalodomegolf.com/site/login",
-  portalBaseUrl:
     process.env.NEXT_PUBLIC_PORTAL_BASE_URL || "https://app.megalodomegolf.com",
   /** Securities counsel */
   legalCounsel: {
