@@ -43,6 +43,7 @@ export const nav: NavItem[] = [
       { href: "/our-mission", label: "Mission" },
       { href: "/our-location", label: "Location" },
       { href: "/team", label: "Team" },
+      { href: "/partners", label: "Partners" },
       { href: "/about", label: "More" },
     ],
   },
@@ -56,6 +57,7 @@ export const nav: NavItem[] = [
 export const footerExplore = [
   { href: "/pictures", label: "Gallery" },
   { href: "/invest", label: "Investors" },
+  { href: "/partners", label: "Partners" },
   { href: "/news", label: "News" },
   { href: "/faq", label: "FAQ" },
   { href: "/contact", label: "Contact" },

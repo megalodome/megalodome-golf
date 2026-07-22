@@ -1,22 +1,39 @@
 "use client";
 
-import { FormEvent, useMemo, useState } from "react";
+import { FormEvent, useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 
-export function ContactForm() {
+const INTERESTS = [
+  "general",
+  "investor",
+  "media",
+  "partnership",
+  "developer",
+  "newsletter",
+] as const;
+
+export function ContactForm({
+  forcedInterest,
+}: {
+  forcedInterest?: (typeof INTERESTS)[number];
+}) {
   const searchParams = useSearchParams();
   const defaultInterest = useMemo(() => {
+    if (forcedInterest) return forcedInterest;
     const q = searchParams.get("interest");
-    if (q && ["general", "investor", "media", "partnership"].includes(q)) {
-      return q;
-    }
+    if (q && (INTERESTS as readonly string[]).includes(q)) return q;
     return "general";
-  }, [searchParams]);
+  }, [searchParams, forcedInterest]);
 
   const [status, setStatus] = useState<"idle" | "loading" | "ok" | "error">(
     "idle"
   );
   const [message, setMessage] = useState("");
+  const [startedAt, setStartedAt] = useState(() => Date.now());
+
+  useEffect(() => {
+    setStartedAt(Date.now());
+  }, []);
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -24,6 +41,7 @@ export function ContactForm() {
     setMessage("");
     const form = e.currentTarget;
     const data = Object.fromEntries(new FormData(form).entries());
+    data.form_started_at = String(startedAt);
 
     try {
       const res = await fetch("/api/contact", {
@@ -38,6 +56,7 @@ export function ContactForm() {
       setStatus("ok");
       setMessage("Thanks — your message was sent. We'll be in touch soon.");
       form.reset();
+      setStartedAt(Date.now());
     } catch (err) {
       setStatus("error");
       setMessage(err instanceof Error ? err.message : "Something went wrong");
@@ -77,17 +96,22 @@ export function ContactForm() {
           <label className="mb-2 block text-sm text-[var(--muted)]" htmlFor="interest">
             I am interested in
           </label>
+          {forcedInterest ? (
+            <input type="hidden" name="interest" value={forcedInterest} />
+          ) : null}
           <select
             className="input"
             id="interest"
-            name="interest"
+            name={forcedInterest ? undefined : "interest"}
             defaultValue={defaultInterest}
             key={defaultInterest}
+            disabled={Boolean(forcedInterest)}
           >
             <option value="general">General inquiry</option>
             <option value="investor">Investor information</option>
             <option value="media">Media / press</option>
-            <option value="partnership">Partnership</option>
+            <option value="partnership">Partnership / vendor</option>
+            <option value="developer">Developer / GC (Chicago)</option>
           </select>
         </div>
         <div>
@@ -96,6 +120,7 @@ export function ContactForm() {
           </label>
           <textarea className="textarea" id="message" name="message" required />
         </div>
+        <input type="hidden" name="form_started_at" value={String(startedAt)} />
         <input
           type="text"
           name="company_website"

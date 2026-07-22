@@ -4,6 +4,7 @@ import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { ScrollToTop } from "@/components/ScrollToTop";
+import { PostHogProvider } from "@/components/PostHogProvider";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -17,10 +18,10 @@ const cormorant = Cormorant_Garamond({
   style: ["normal", "italic"],
 });
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://megalodomegolf.com";
+
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL || "https://megalodomegolf.com"
-  ),
+  metadataBase: new URL(siteUrl),
   title: {
     default: "MEGALODOME GOLF | THE NEXT REVOLUTION™",
     template: "%s | MEGALODOME GOLF",
@@ -58,6 +59,52 @@ export const metadata: Metadata = {
   },
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      name: "MEGALODOME GOLF",
+      url: siteUrl,
+      logo: `${siteUrl}/icon-512.png`,
+      email: "info@megalodomegolf.com",
+      telephone: "+1-872-339-1004",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "400 Knoll Street, unit C",
+        addressLocality: "Wheaton",
+        addressRegion: "IL",
+        postalCode: "60187",
+        addressCountry: "US",
+      },
+      sameAs: [],
+    },
+    {
+      "@type": "WebSite",
+      name: "MEGALODOME GOLF",
+      url: siteUrl,
+      potentialAction: {
+        "@type": "SearchAction",
+        target: `${siteUrl}/search?q={search_term_string}`,
+        "query-input": "required name=search_term_string",
+      },
+    },
+    {
+      "@type": "SportsActivityLocation",
+      name: "MEGALODOME GOLF Chicago West",
+      description:
+        "Indoor traditional golf under proprietary domes — Oswego, IL flagship targeting Fall 2027.",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Oswego",
+        addressRegion: "IL",
+        addressCountry: "US",
+      },
+      url: siteUrl,
+    },
+  ],
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
@@ -66,6 +113,11 @@ export default function RootLayout({
       <body
         className={`${montserrat.variable} ${cormorant.variable} antialiased`}
       >
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+        <PostHogProvider />
         <Header />
         <main className="min-h-[70vh]">{children}</main>
         <Footer />

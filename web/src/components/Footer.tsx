@@ -1,10 +1,11 @@
 import Link from "next/link";
 import { footerExplore, site } from "@/lib/content";
+import { NewsletterForm } from "@/components/NewsletterForm";
 
 export function Footer() {
   return (
     <footer className="mt-10 border-t border-[rgba(238,220,167,0.15)] bg-[#0a0a0a]">
-      <div className="container grid gap-8 py-10 md:grid-cols-[1.4fr_1fr_1fr]">
+      <div className="container grid gap-8 py-10 md:grid-cols-[1.3fr_1fr_1fr_1.1fr]">
         <div>
           <div className="display text-2xl">{site.name}</div>
           <p className="mt-2 text-[var(--gold)]">{site.tagline}</p>
@@ -40,6 +41,7 @@ export function Footer() {
             <Link href="/login">Login</Link>
           </div>
         </div>
+        <NewsletterForm />
       </div>
       <div className="border-t border-[var(--line)] py-4">
         <div className="container flex flex-col gap-2 text-sm text-[var(--muted)] sm:flex-row sm:items-center sm:justify-between">

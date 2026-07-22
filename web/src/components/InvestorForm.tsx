@@ -28,9 +28,11 @@ export function InvestorForm({
   );
   const [message, setMessage] = useState("");
   const [utms, setUtms] = useState<Record<string, string>>({});
+  const [startedAt, setStartedAt] = useState(() => Date.now());
 
   useEffect(() => {
     setUtms(readUtms());
+    setStartedAt(Date.now());
   }, []);
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
@@ -49,6 +51,7 @@ export function InvestorForm({
       ? "true"
       : "false";
     Object.assign(data, utms);
+    data.form_started_at = String(startedAt);
 
     try {
       const res = await fetch("/api/invest", {
@@ -219,6 +222,7 @@ export function InvestorForm({
           className="hidden"
           aria-hidden="true"
         />
+        <input type="hidden" name="form_started_at" value={String(startedAt)} />
 
         <button
           type="submit"

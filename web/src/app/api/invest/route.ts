@@ -16,6 +16,10 @@ import {
   createSuiteDashContact,
   splitName,
 } from "@/lib/suitedash";
+import {
+  shouldDropAsSpam,
+  verifyTurnstileIfConfigured,
+} from "@/lib/spam";
 
 export const runtime = "nodejs";
 
@@ -39,6 +43,9 @@ type Body = {
   utm_medium?: string;
   utm_campaign?: string;
   company_website?: string;
+  form_started_at?: string | number;
+  cf_turnstile_response?: string;
+  "cf-turnstile-response"?: string;
 };
 
 function truthy(v: unknown) {
@@ -67,7 +74,29 @@ function scoreLead(input: {
 export async function POST(req: Request) {
   try {
     const body = (await req.json()) as Body;
-    if (body.company_website) return NextResponse.json({ ok: true });
+
+    if (
+      shouldDropAsSpam({
+        honeypot: body.company_website,
+        formStartedAt: body.form_started_at,
+        minMs: 2800,
+      })
+    ) {
+      return NextResponse.json({ ok: true });
+    }
+
+    const turnstileToken =
+      body.cf_turnstile_response || body["cf-turnstile-response"];
+    const turnstileOk = await verifyTurnstileIfConfigured(
+      turnstileToken,
+      req.headers.get("x-forwarded-for")?.split(",")[0]?.trim()
+    );
+    if (!turnstileOk) {
+      return NextResponse.json(
+        { error: "Spam verification failed. Please try again." },
+        { status: 400 }
+      );
+    }
 
     let firstName = (body.firstName || "").trim();
     let lastName = (body.lastName || "").trim();

@@ -110,6 +110,22 @@ export const searchIndex: SearchEntry[] = [
     keywords: ["contact", "email", "phone", "message", "support"],
   },
   {
+    href: "/partners",
+    title: "Partners & Developers",
+    summary:
+      "Chicago-area GCs, facility operators, equipment partners, and trade collaborators — vendor intros separate from investor discovery.",
+    keywords: [
+      "partners",
+      "developers",
+      "vendor",
+      "gc",
+      "contractor",
+      "equipment",
+      "operator",
+      "trade",
+    ],
+  },
+  {
     href: "/login",
     title: "Login",
     summary: "Staff and investor portal login chooser.",

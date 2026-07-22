@@ -6,6 +6,10 @@ import {
   splitName,
   SUITEDASH_RECOMMENDED,
 } from "@/lib/suitedash";
+import {
+  shouldDropAsSpam,
+  verifyTurnstileIfConfigured,
+} from "@/lib/spam";
 
 export const runtime = "nodejs";
 
@@ -17,48 +21,84 @@ type Body = {
   message?: string;
   company?: string;
   company_website?: string;
+  form_started_at?: string | number;
+  cf_turnstile_response?: string;
+  "cf-turnstile-response"?: string;
 };
 
 export async function POST(req: Request) {
   try {
     const body = (await req.json()) as Body;
 
-    if (body.company_website) {
+    // Honeypot + min fill time — silent OK so bots think it worked
+    if (
+      shouldDropAsSpam({
+        honeypot: body.company_website,
+        formStartedAt: body.form_started_at,
+        minMs: body.interest === "newsletter" ? 1200 : 2800,
+      })
+    ) {
       return NextResponse.json({ ok: true });
     }
 
-    const name = (body.name || "").trim();
-    const email = (body.email || "").trim();
-    const phone = (body.phone || "").trim();
-    const interest = (body.interest || "general").trim();
-    const message = (body.message || "").trim();
-    const company = (body.company || "").trim();
-
-    if (!name || !email || !message) {
+    const turnstileToken =
+      body.cf_turnstile_response || body["cf-turnstile-response"];
+    const turnstileOk = await verifyTurnstileIfConfigured(
+      turnstileToken,
+      req.headers.get("x-forwarded-for")?.split(",")[0]?.trim()
+    );
+    if (!turnstileOk) {
       return NextResponse.json(
-        { error: "Name, email, and message are required." },
+        { error: "Spam verification failed. Please try again." },
         { status: 400 }
       );
     }
 
+    const interest = (body.interest || "general").trim().toLowerCase();
+    const isNewsletter = interest === "newsletter";
+    const email = (body.email || "").trim();
+    const name = (body.name || "").trim() || (isNewsletter ? email : "");
+    const phone = (body.phone || "").trim();
+    const message = (body.message || "").trim() ||
+      (isNewsletter ? "Newsletter signup from website" : "");
+    const company = (body.company || "").trim();
+
+    if (!email || (!isNewsletter && (!name || !message))) {
+      return NextResponse.json(
+        {
+          error: isNewsletter
+            ? "Email is required."
+            : "Name, email, and message are required.",
+        },
+        { status: 400 }
+      );
+    }
+    if (isNewsletter && !email.includes("@")) {
+      return NextResponse.json({ error: "Valid email is required." }, { status: 400 });
+    }
+
     const sourceSite = process.env.LEAD_SOURCE_SITE || "megalodomegolf.com";
-    const isInvestor = interest.toLowerCase() === "investor";
-    const isMedia = interest.toLowerCase() === "media";
+    const isInvestor = interest === "investor";
+    const isMedia = interest === "media";
     const isPartner =
-      interest.toLowerCase() === "partner" ||
-      interest.toLowerCase() === "partnership";
+      interest === "partner" ||
+      interest === "partnership" ||
+      interest === "developer";
 
     let suitedashUid: string | null = null;
     // Always sync website form leads into CRM so automations/tags/circles apply.
     try {
-      const { firstName, lastName } = splitName(name);
+      const { firstName, lastName } = splitName(name || email);
       const tags = [
         "website",
         "source:megalodomegolf.com",
-        "path:contact",
+        isNewsletter ? "path:newsletter" : "path:contact",
         `interest:${interest || "general"}`,
       ];
       const circles: string[] = [SUITEDASH_RECOMMENDED.circleIds.websiteLeads];
+      if (isNewsletter) {
+        tags.push("newsletter", "audience:newsletter");
+      }
       if (isInvestor) {
         tags.push(
           "investor",
@@ -74,6 +114,7 @@ export async function POST(req: Request) {
       }
       if (isPartner) {
         tags.push("partner");
+        if (interest === "developer") tags.push("developer");
         circles.push(SUITEDASH_RECOMMENDED.circleIds.partners);
       }
 
@@ -83,7 +124,11 @@ export async function POST(req: Request) {
         email,
         phone: phone || undefined,
         company: company || undefined,
-        title: isInvestor ? "Investor" : interest,
+        title: isInvestor
+          ? "Investor"
+          : isNewsletter
+            ? "Newsletter"
+            : interest,
         role: "Lead",
         tags,
         circlesToAdd: circles,
@@ -94,7 +139,9 @@ export async function POST(req: Request) {
               source: sourceSite,
               page: "/contact",
             })
-          : `Website contact (${interest})\n\n${message}`,
+          : isNewsletter
+            ? "Newsletter signup from website footer"
+            : `Website contact (${interest})\n\n${message}`,
         sendWelcomeEmail: false,
       });
       suitedashUid = contact.uid;
@@ -104,9 +151,9 @@ export async function POST(req: Request) {
 
     await insertSupabaseLead({
       source_site: sourceSite,
-      source_page: "/contact",
-      source_form: "contact",
-      name,
+      source_page: isNewsletter ? "/newsletter" : "/contact",
+      source_form: isNewsletter ? "newsletter" : "contact",
+      name: name || email,
       email,
       phone: phone || null,
       company: company || null,
@@ -117,14 +164,17 @@ export async function POST(req: Request) {
         interest,
         suitedashUid,
         userAgent: req.headers.get("user-agent"),
+        tags: isNewsletter ? ["newsletter"] : undefined,
       },
     });
 
     await sendLeadEmail({
-      subject: `${isInvestor ? "INVESTOR " : ""}Website lead (${interest}) — ${name}`,
+      subject: isNewsletter
+        ? `Newsletter signup — ${email}`
+        : `${isInvestor ? "INVESTOR " : isPartner ? "PARTNER " : ""}Website lead (${interest}) — ${name}`,
       replyTo: email,
       text: [
-        `Name: ${name}`,
+        `Name: ${name || "—"}`,
         `Email: ${email}`,
         `Phone: ${phone || "—"}`,
         `Company: ${company || "—"}`,

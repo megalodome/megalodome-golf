@@ -19,6 +19,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/media-kit",
     "/faq",
     "/contact",
+    "/partners",
     "/login",
     "/search",
     "/privacy",

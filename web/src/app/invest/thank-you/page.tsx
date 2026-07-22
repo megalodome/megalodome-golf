@@ -21,13 +21,23 @@ export default function InvestThankYouPage() {
           </p>
           <div className="mx-auto mt-8 max-w-md space-y-3 text-left text-sm text-[var(--muted)]">
             <div className="rounded-lg border border-[var(--line)] px-4 py-3">
-              1. Review Tier 0–1 materials
+              <strong className="text-[var(--gold-light)]">1. Materials</strong>
+              <div className="mt-1">
+                Review your Tier 0–1 pack (and NDA if requested) in email.
+              </div>
+            </div>
+            <div className="rounded-lg border border-[rgba(238,220,167,0.35)] bg-[rgba(238,220,167,0.06)] px-4 py-3">
+              <strong className="text-[var(--gold-light)]">2. Book discovery</strong>
+              <div className="mt-1">
+                Reserve a 20-min call with Nick / the raise team — highest
+                priority next step.
+              </div>
             </div>
             <div className="rounded-lg border border-[var(--line)] px-4 py-3">
-              2. Book a 20-min discovery call with the raise team
-            </div>
-            <div className="rounded-lg border border-[var(--line)] px-4 py-3">
-              3. Execute NDA to unlock Tier 2 data room
+              <strong className="text-[var(--gold-light)]">3. Diligence path</strong>
+              <div className="mt-1">
+                Execute NDA to unlock Tier 2 data-room access when ready.
+              </div>
             </div>
           </div>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
