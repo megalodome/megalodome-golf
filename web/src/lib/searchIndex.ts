@@ -45,8 +45,19 @@ export const searchIndex: SearchEntry[] = [
   {
     href: "/pictures",
     title: "Gallery",
-    summary: "Course renders, dome visuals, and gallery images of the MEGALODOME experience.",
-    keywords: ["gallery", "pictures", "photos", "renders", "images"],
+    summary: "Course renders, dome exterior/interior, clubhouse, and convention gallery tabs.",
+    keywords: [
+      "gallery",
+      "pictures",
+      "photos",
+      "renders",
+      "images",
+      "dome",
+      "clubhouse",
+      "conventions",
+      "outside",
+      "inside",
+    ],
   },
   {
     href: "/invest",
