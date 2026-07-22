@@ -5,6 +5,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { PostHogProvider } from "@/components/PostHogProvider";
+import { SiteChat } from "@/components/SiteChat";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -122,6 +123,7 @@ export default function RootLayout({
         <main className="min-h-[70vh]">{children}</main>
         <Footer />
         <ScrollToTop />
+        <SiteChat />
       </body>
     </html>
   );
