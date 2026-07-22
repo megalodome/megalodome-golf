@@ -3,28 +3,43 @@
 import { FormEvent, useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 
-const INTERESTS = [
-  "general",
-  "investor",
-  "media",
-  "partnership",
-  "developer",
-  "newsletter",
+const ALL_INTERESTS = [
+  { value: "general", label: "General inquiry" },
+  { value: "investor", label: "Investor information" },
+  { value: "media", label: "Media / press" },
+  { value: "partnership", label: "Partnership / vendor" },
+  { value: "developer", label: "Developer / GC (Chicago)" },
 ] as const;
+
+type InterestValue = (typeof ALL_INTERESTS)[number]["value"];
 
 export function ContactForm({
   forcedInterest,
+  allowedInterests,
 }: {
-  forcedInterest?: (typeof INTERESTS)[number];
+  /** Default selected interest (still changeable). */
+  forcedInterest?: InterestValue;
+  /** Limit dropdown options (e.g. partners page). */
+  allowedInterests?: InterestValue[];
 }) {
   const searchParams = useSearchParams();
-  const defaultInterest = useMemo(() => {
-    if (forcedInterest) return forcedInterest;
-    const q = searchParams.get("interest");
-    if (q && (INTERESTS as readonly string[]).includes(q)) return q;
-    return "general";
-  }, [searchParams, forcedInterest]);
+  const options = useMemo(() => {
+    if (allowedInterests?.length) {
+      return ALL_INTERESTS.filter((o) => allowedInterests.includes(o.value));
+    }
+    return [...ALL_INTERESTS];
+  }, [allowedInterests]);
 
+  const defaultInterest = useMemo(() => {
+    const q = searchParams.get("interest");
+    if (forcedInterest && options.some((o) => o.value === forcedInterest)) {
+      return forcedInterest;
+    }
+    if (q && options.some((o) => o.value === q)) return q;
+    return options[0]?.value || "general";
+  }, [searchParams, forcedInterest, options]);
+
+  const [interest, setInterest] = useState(defaultInterest);
   const [status, setStatus] = useState<"idle" | "loading" | "ok" | "error">(
     "idle"
   );
@@ -33,7 +48,8 @@ export function ContactForm({
 
   useEffect(() => {
     setStartedAt(Date.now());
-  }, []);
+    setInterest(defaultInterest);
+  }, [defaultInterest]);
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -42,6 +58,7 @@ export function ContactForm({
     const form = e.currentTarget;
     const data = Object.fromEntries(new FormData(form).entries());
     data.form_started_at = String(startedAt);
+    data.interest = interest;
 
     try {
       const res = await fetch("/api/contact", {
@@ -56,6 +73,7 @@ export function ContactForm({
       setStatus("ok");
       setMessage("Thanks — your message was sent. We'll be in touch soon.");
       form.reset();
+      setInterest(defaultInterest);
       setStartedAt(Date.now());
     } catch (err) {
       setStatus("error");
@@ -96,23 +114,22 @@ export function ContactForm({
           <label className="mb-2 block text-sm text-[var(--muted)]" htmlFor="interest">
             I am interested in
           </label>
-          {forcedInterest ? (
-            <input type="hidden" name="interest" value={forcedInterest} />
-          ) : null}
-          <select
-            className="input"
-            id="interest"
-            name={forcedInterest ? undefined : "interest"}
-            defaultValue={defaultInterest}
-            key={defaultInterest}
-            disabled={Boolean(forcedInterest)}
-          >
-            <option value="general">General inquiry</option>
-            <option value="investor">Investor information</option>
-            <option value="media">Media / press</option>
-            <option value="partnership">Partnership / vendor</option>
-            <option value="developer">Developer / GC (Chicago)</option>
-          </select>
+          <div className="select-wrap">
+            <select
+              className="input select-input"
+              id="interest"
+              name="interest"
+              value={interest}
+              onChange={(e) => setInterest(e.target.value)}
+              required
+            >
+              {options.map((o) => (
+                <option key={o.value} value={o.value}>
+                  {o.label}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
         <div>
           <label className="mb-2 block text-sm text-[var(--muted)]" htmlFor="message">

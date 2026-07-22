@@ -104,7 +104,10 @@ export default function PartnersPage() {
               <h2 className="display mt-2 text-3xl">Tell us about your firm</h2>
             </div>
             <Suspense fallback={<div className="card p-6 muted">Loading form…</div>}>
-              <ContactForm forcedInterest="partnership" />
+              <ContactForm
+                forcedInterest="partnership"
+                allowedInterests={["partnership", "developer"]}
+              />
             </Suspense>
           </div>
         </div>

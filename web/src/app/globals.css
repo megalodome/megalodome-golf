@@ -115,7 +115,7 @@ h1, h2, h3, h4 {
 }
 .divider.center { margin-inline: auto; }
 
-.input, .textarea, select.input {
+.input, .textarea, select.input, select.select-input {
   width: 100%;
   border-radius: 0.75rem;
   border: 1px solid rgba(238, 220, 167, 0.2);
@@ -125,11 +125,44 @@ h1, h2, h3, h4 {
   outline: none;
   font-family: inherit;
 }
-.input:focus, .textarea:focus {
+.input:focus, .textarea:focus, select.input:focus, select.select-input:focus {
   border-color: rgba(238, 220, 167, 0.55);
   box-shadow: 0 0 0 3px rgba(238, 220, 167, 0.08);
 }
 .textarea { min-height: 140px; resize: vertical; }
+
+/* Native select: readable on dark theme (options often render OS-native) */
+.select-wrap {
+  position: relative;
+}
+select.select-input,
+select.input {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+  color-scheme: dark;
+  padding-right: 2.5rem;
+  background-color: #14110a;
+  background-image:
+    linear-gradient(45deg, transparent 50%, #eedca7 50%),
+    linear-gradient(135deg, #eedca7 50%, transparent 50%);
+  background-position:
+    calc(100% - 18px) calc(50% - 3px),
+    calc(100% - 12px) calc(50% - 3px);
+  background-size: 6px 6px, 6px 6px;
+  background-repeat: no-repeat;
+}
+select.select-input:disabled,
+select.input:disabled {
+  opacity: 0.85;
+  cursor: not-allowed;
+}
+select.select-input option,
+select.input option {
+  background-color: #14110a;
+  color: #f0e8d0;
+}
 
 .grid-3 {
   display: grid;
