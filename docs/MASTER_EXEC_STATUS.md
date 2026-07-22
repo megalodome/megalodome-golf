@@ -6,6 +6,8 @@
 
 Parallel agents + direct execution. No full email blasts were sent.
 
+**Latest planning doc:** [`docs/CRM_BRANDING_AND_IMPROVEMENT_PLAN.md`](./CRM_BRANDING_AND_IMPROVEMENT_PLAN.md) — live CRM audit + phased branding/ops plan (forms, emails, marketing, portals, untapped modules).
+
 ---
 
 ## 1) Website (DONE — deployed)

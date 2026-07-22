@@ -10,10 +10,10 @@ export const site = {
   bookingUrl:
     process.env.NEXT_PUBLIC_BOOKING_URL ||
     "https://app.megalodomegolf.com/book",
-  /** NDA / data-room request form */
+  /** NDA / data-room request form (friendly CRM alias) */
   ndaFormUrl:
     process.env.NEXT_PUBLIC_NDA_FORM_URL ||
-    "https://app.megalodomegolf.com/frm/yFQpH3JDwZXuLQzL",
+    "https://app.megalodomegolf.com/nda",
   /** Vendor / developer intro form (friendly CRM alias) */
   vendorFormUrl:
     process.env.NEXT_PUBLIC_VENDOR_FORM_URL ||
