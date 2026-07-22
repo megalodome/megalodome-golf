@@ -4,6 +4,7 @@ import { PageHero } from "@/components/PageHero";
 import { InvestorDisclaimer, InvestorSubnav } from "@/components/InvestorChrome";
 import { InvestorForm } from "@/components/InvestorForm";
 import docs from "@/lib/investorDocsIndex.json";
+import { site } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Data Room",
@@ -75,12 +76,22 @@ export default function DataRoomPage() {
               Tier 2 — NDA data room
             </h2>
             <p className="muted mt-2 text-sm leading-7">
-              Gate: signed Mutual NDA + accreditation verification underway.
-              Includes Target Asset Preview, full pro-forma workbook, and deeper
-              diligence as available. Submit with <strong className="text-white">NDA
-              requested</strong> checked to receive the NDA template immediately.
-            </p>
-            <ul className="mt-4 grid gap-2 md:grid-cols-2">
+                          Gate: signed Mutual NDA + accreditation verification underway.
+                          Includes Target Asset Preview, full pro-forma workbook, and deeper
+                          diligence as available. Submit with <strong className="text-white">NDA
+                          requested</strong> checked to receive the NDA template immediately.
+                        </p>
+                        <div className="mt-4">
+                          <a
+                            href={site.ndaFormUrl}
+                            className="btn btn-primary"
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            Open NDA / data-room request form
+                          </a>
+                        </div>
+
               <li className="rounded-lg border border-[var(--line)] px-3 py-3 text-sm text-[var(--muted)]">
                 Mutual NDA (emailed on request)
               </li>

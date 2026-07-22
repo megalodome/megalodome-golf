@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Suspense } from "react";
 import { PageHero } from "@/components/PageHero";
 import { ContactForm } from "@/components/ContactForm";
-import { Suspense } from "react";
+import { site } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Partners & Developers",
@@ -79,6 +80,14 @@ export default function PartnersPage() {
                 page.
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
+                <a
+                  href={site.vendorFormUrl}
+                  className="btn btn-primary"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Vendor / developer form
+                </a>
                 <Link href="/contact?interest=partnership" className="btn btn-secondary">
                   General contact
                 </Link>
