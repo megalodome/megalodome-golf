@@ -7,11 +7,11 @@ export const site = {
   hours: "6am–midnight CT, every day",
   emailNotify: process.env.LEAD_NOTIFY_EMAIL || "hello@megalodomegolf.com",
   flyerPath: "/docs/flyer-2026.pdf",
-  /** Investor booking form — 20-min discovery call */
+  /** Investor booking form — 20-min discovery call (friendly CRM alias) */
   bookingUrl:
     process.env.NEXT_PUBLIC_BOOKING_URL ||
-    "https://app.megalodomegolf.com/frm/2rWPC5u8yME2svA8N",
-  /** NDA / data-room request form */
+    "https://app.megalodomegolf.com/book",
+
   ndaFormUrl:
     process.env.NEXT_PUBLIC_NDA_FORM_URL ||
     "https://app.megalodomegolf.com/frm/yFQpH3JDwZXuLQzL",
