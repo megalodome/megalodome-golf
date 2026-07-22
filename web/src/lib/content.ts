@@ -14,12 +14,12 @@ export const site = {
   ndaFormUrl:
     process.env.NEXT_PUBLIC_NDA_FORM_URL ||
     "https://app.megalodomegolf.com/frm/yFQpH3JDwZXuLQzL",
-  /** Vendor / developer intro form */
-  vendorFormUrl:
-    process.env.NEXT_PUBLIC_VENDOR_FORM_URL ||
-    "https://app.megalodomegolf.com/frm/2w51j8Ujgg1XaJATK",
-  /** Team / investor portal login */
-  staffLoginUrl:
+  /** Vendor / developer intro form (friendly CRM alias) */
+    vendorFormUrl:
+      process.env.NEXT_PUBLIC_VENDOR_FORM_URL ||
+      "https://app.megalodomegolf.com/partners",
+    /** Team / investor portal login */
+
     process.env.NEXT_PUBLIC_STAFF_LOGIN_URL ||
     "https://app.megalodomegolf.com/site/login",
   investorLoginUrl:
