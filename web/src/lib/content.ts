@@ -6,7 +6,6 @@ export const site = {
   openTarget: "Fall 2027",
   hours: "6am–midnight CT, every day",
   emailNotify: process.env.LEAD_NOTIFY_EMAIL || "hello@megalodomegolf.com",
-  flyerPath: "/docs/flyer-2026.pdf",
   /** Investor booking form — 20-min discovery call (friendly CRM alias) */
   bookingUrl:
     process.env.NEXT_PUBLIC_BOOKING_URL ||
@@ -37,11 +36,6 @@ export const site = {
     email: "Timothy@VincentEsq.com",
     website: "https://vincentesquire.com",
   },
-  fullPageAds: [
-    { label: "Full-page ad A", href: "/docs/ads/full-page-ad-a.pdf" },
-    { label: "Full-page ad B", href: "/docs/ads/full-page-ad-b.pdf" },
-    { label: "Full-page ad C", href: "/docs/ads/full-page-ad-c.pdf" },
-  ],
 };
 
 export type NavChild = { href: string; label: string };

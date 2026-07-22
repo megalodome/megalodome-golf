@@ -42,10 +42,10 @@ export default function ContactPage() {
                 </Link>
               </p>
               <p>
-                <strong className="text-white">Investor packet:</strong>{" "}
-                <a className="text-[var(--gold)]" href={site.flyerPath}>
-                  Download flyer / advertorial PDF
-                </a>
+                <strong className="text-white">Investor materials:</strong>{" "}
+                <Link className="text-[var(--gold)]" href="/invest/data-room">
+                  Data room / one-pager
+                </Link>
               </p>
               <p>
                 Messages are stored in CRM + secure lead archive and emailed to

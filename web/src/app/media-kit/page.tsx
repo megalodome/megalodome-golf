@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { PageHero } from "@/components/PageHero";
-import { site } from "@/lib/content";
 
 export const metadata: Metadata = {
-  title: "Media Kit",
-  description:
-    "MEGALODOME GOLF media kit — flyer, advertorial, and full-page ads.",
+  title: "Media",
+  description: "Press and media contact for MEGALODOME GOLF.",
 };
 
 export default function MediaKitPage() {
@@ -13,49 +12,29 @@ export default function MediaKitPage() {
     <>
       <PageHero
         eyebrow="Media"
-        title="Media kit"
-        subtitle="Download the flyer / advertorial and full-page ads for press and partner use."
+        title="Press & media"
+        subtitle="For press inquiries and media requests, contact the MEGALODOME team."
       />
       <section className="section">
-        <div className="container max-w-3xl space-y-6">
+        <div className="container max-w-3xl">
           <article className="card p-7">
             <h2 className="display text-2xl text-[var(--gold-soft)]">
-              Flyer / Advertorial
+              Media inquiries
             </h2>
             <div className="divider" />
             <p className="muted mb-5 leading-7">
-              2-page MEGALODOME GOLF advertorial PDF.
-            </p>
-            <a
-              href={site.flyerPath}
-              className="btn btn-primary"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Download flyer
-            </a>
-          </article>
-
-          <article className="card p-7">
-            <h2 className="display text-2xl text-[var(--gold-soft)]">
-              Full-page ads
-            </h2>
-            <div className="divider" />
-            <p className="muted mb-5 leading-7">
-              Final full-page ad creatives A, B, and C.
+              Reach the team for interviews, brand assets, and partnership press.
             </p>
             <div className="flex flex-wrap gap-3">
-              {site.fullPageAds.map((ad) => (
-                <a
-                  key={ad.href}
-                  href={ad.href}
-                  className="btn btn-secondary"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  {ad.label}
-                </a>
-              ))}
+              <Link href="/contact?interest=media" className="btn btn-primary">
+                Contact media team
+              </Link>
+              <Link href="/pictures" className="btn btn-secondary">
+                View gallery
+              </Link>
+              <Link href="/news" className="btn btn-secondary">
+                News coverage
+              </Link>
             </div>
           </article>
         </div>

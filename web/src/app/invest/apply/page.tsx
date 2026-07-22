@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { PageHero } from "@/components/PageHero";
 import { InvestorForm } from "@/components/InvestorForm";
 import { InvestorDisclaimer, InvestorSubnav } from "@/components/InvestorChrome";
-import { site } from "@/lib/content";
 import { investor } from "@/lib/investor";
 
 export const metadata: Metadata = {
@@ -46,9 +46,9 @@ export default function InvestApplyPage() {
                 {investor.headline.totalCap} total cap
               </p>
               <p className="mt-2">
-                <a className="text-[var(--gold)]" href={site.flyerPath}>
-                  Flyer / Advertorial PDF
-                </a>
+                <Link className="text-[var(--gold)]" href="/docs/investor/one-pager.pdf">
+                  One-pager PDF
+                </Link>
               </p>
             </div>
             <InvestorDisclaimer compact />

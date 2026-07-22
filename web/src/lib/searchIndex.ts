@@ -105,8 +105,8 @@ export const searchIndex: SearchEntry[] = [
   {
     href: "/media-kit",
     title: "Media Kit",
-    summary: "Media downloads, ads, flyer, and press assets.",
-    keywords: ["media kit", "press", "ads", "flyer", "download"],
+    summary: "Press contact and media inquiries.",
+    keywords: ["media kit", "press", "media", "contact"],
   },
   {
     href: "/faq",

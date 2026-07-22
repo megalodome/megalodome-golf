@@ -89,72 +89,6 @@ export default function HomePage() {
       </section>
 
       <section className="section pt-0">
-        <div className="container">
-          <div className="specs-row">
-            <div className="spec-item">
-              <div className="spec-number">9</div>
-              <div className="spec-label">Executive Holes — Par 30</div>
-            </div>
-            <div className="spec-item">
-              <div className="spec-number">4</div>
-              <div className="spec-label">Proprietary Domes</div>
-            </div>
-            <div className="spec-item">
-              <div className="spec-number">275</div>
-              <div className="spec-label">Yards — Practice Range</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="section pt-0">
-        <div className="container">
-          <p className="section-label mb-2 text-center">The Course</p>
-          <h2 className="display mb-8 text-center text-4xl">What Awaits You</h2>
-          <div className="grid-3">
-            {features.map((f) => (
-              <article key={f.title} className="card">
-                <Image
-                  src={f.img}
-                  alt={f.title}
-                  width={800}
-                  height={560}
-                  className="h-52 w-full object-cover"
-                />
-                <div className="p-5">
-                  <h3 className="display text-2xl text-[var(--gold)]">{f.title}</h3>
-                  <p className="muted mt-2 text-sm leading-7">{f.body}</p>
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section pt-0">
-        <div className="container max-w-4xl">
-          <p className="section-label mb-2 text-center">See It in Action</p>
-          <h2 className="display mb-2 text-center text-4xl">Watch Our Video</h2>
-          <p className="mb-6 text-center italic text-[var(--text-muted)]">
-            MEGALODOME GOLF &quot;THE NEXT REVOLUTION&quot;™
-          </p>
-          <div className="video-wrap">
-            <video
-              className="h-full w-full"
-              controls
-              playsInline
-              preload="metadata"
-              poster="/images/invest-domes.jpg"
-              controlsList="nodownload"
-            >
-              <source src="/video/megalodome-intro.mp4" type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
-          </div>
-        </div>
-      </section>
-
-      <section className="section pt-0">
         <div className="container card p-8 md:p-12">
           <div className="grid gap-6 md:grid-cols-[1.3fr_1fr] md:items-center">
             <div>
@@ -173,9 +107,6 @@ export default function HomePage() {
               <Link href="/invest" className="btn btn-primary">
                 Investor Portal
               </Link>
-              <a href={site.flyerPath} className="btn btn-secondary" target="_blank" rel="noreferrer">
-                Flyer / Advertorial
-              </a>
             </div>
           </div>
         </div>

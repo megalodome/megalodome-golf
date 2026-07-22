@@ -57,14 +57,6 @@ export default function InvestThankYouPage() {
             >
               One-pager PDF
             </a>
-            <a
-              href={site.flyerPath}
-              className="btn btn-secondary"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Flyer / Advertorial
-            </a>
             <Link href="/invest/data-room" className="btn btn-secondary">
               Data room
             </Link>
