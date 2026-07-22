@@ -70,3 +70,22 @@ Executed against live CRM `app.megalodomegolf.com` + site deploy.
 - `docs/EMAIL_HTML_SHELL.md`  
 - `reports/crm_audit/phaseA_exec_result.json`  
 - `reports/crm_audit/final_*.png` / `phase_book_themed.png` / `phaseA_nda_public.png`  
+
+
+## Continue pass (same day)
+
+| Item | Status |
+|---|---|
+| Investor FLOW content steps (one-pager, book, nda, invest) | ✅ Added via chain (verify in UI Manage FLOW) |
+| Staff Onboarding FLOW link steps | ✅ Attempted |
+| Booking theme v2 + calendar day buttons darker | ⚠️ Partial (platform Book-Me widget limits) |
+| Portal bodies re-saved | ✅ |
+| QR short-link pack doc | ✅ `docs/QR_AND_SHORT_LINKS.md` |
+| Office Mutual NDA proposal | ⏳ UI tab path flaky — create manually under Office → Proposals |
+| Seed-send | ⏳ Human only |
+
+### Investor FLOW intended steps
+1. Review one-pager → `/docs/investor/one-pager.pdf`
+2. Book discovery → `app.../book`
+3. Request NDA → `app.../nda`
+4. Investor hub → `/invest`
