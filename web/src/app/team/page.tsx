@@ -49,7 +49,7 @@ const team = [
 ];
 
 const partners =
-  "Huxham Golf Design · Bond Conway Law (securities counsel) · SportsDome Advisory (strategy & operating model)";
+  "Huxham Golf Design · Vincent Esquire / Timothy Lange (securities counsel) · SportsDome Advisory (strategy & operating model)";
 
 export default function TeamPage() {
   return (

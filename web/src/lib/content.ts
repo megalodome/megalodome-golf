@@ -11,7 +11,7 @@ export const site = {
   bookingUrl:
     process.env.NEXT_PUBLIC_BOOKING_URL ||
     "https://app.megalodomegolf.com/book",
-
+  /** NDA / data-room request form */
   ndaFormUrl:
     process.env.NEXT_PUBLIC_NDA_FORM_URL ||
     "https://app.megalodomegolf.com/frm/yFQpH3JDwZXuLQzL",
@@ -28,6 +28,15 @@ export const site = {
     "https://app.megalodomegolf.com/site/login",
   portalBaseUrl:
     process.env.NEXT_PUBLIC_PORTAL_BASE_URL || "https://app.megalodomegolf.com",
+  /** Securities counsel */
+  legalCounsel: {
+    name: "Timothy Lange",
+    title: "Attorney",
+    firm: "Vincent Esquire",
+    phone: "440-477-3378",
+    email: "Timothy@VincentEsq.com",
+    website: "https://vincentesquire.com",
+  },
   fullPageAds: [
     { label: "Full-page ad A", href: "/docs/ads/full-page-ad-a.pdf" },
     { label: "Full-page ad B", href: "/docs/ads/full-page-ad-b.pdf" },

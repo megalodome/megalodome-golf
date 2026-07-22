@@ -113,11 +113,11 @@ export default function DataRoomPage() {
               Tier 3 — Offering & close
             </h2>
             <p className="muted mt-2 text-sm leading-7">
-              Verified accredited investors only. PPM, subscription documents, and
-              operating agreement are issued with securities counsel (Bond Conway
-              process) — not published on the website.
-            </p>
-          </article>
+                          Verified accredited investors only. PPM, subscription documents, and
+                          operating agreement are issued with securities counsel (Timothy Lange,
+                          Vincent Esquire) — not published on the website.
+                        </p>
+                      </article>
 
           <div>
             <div className="eyebrow mb-2">Request access</div>
