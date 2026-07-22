@@ -76,22 +76,23 @@ export default function DataRoomPage() {
               Tier 2 — NDA data room
             </h2>
             <p className="muted mt-2 text-sm leading-7">
-                          Gate: signed Mutual NDA + accreditation verification underway.
-                          Includes Target Asset Preview, full pro-forma workbook, and deeper
-                          diligence as available. Submit with <strong className="text-white">NDA
-                          requested</strong> checked to receive the NDA template immediately.
-                        </p>
-                        <div className="mt-4">
-                          <a
-                            href={site.ndaFormUrl}
-                            className="btn btn-primary"
-                            target="_blank"
-                            rel="noreferrer"
-                          >
-                            Open NDA / data-room request form
-                          </a>
-                        </div>
-
+              Gate: signed Mutual NDA + accreditation verification underway.
+              Includes Target Asset Preview, full pro-forma workbook, and deeper
+              diligence as available. Use the NDA request form or check{" "}
+              <strong className="text-white">NDA requested</strong> on the inquiry
+              form.
+            </p>
+            <div className="mt-4">
+              <a
+                href={site.ndaFormUrl}
+                className="btn btn-primary"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Open NDA / data-room request form
+              </a>
+            </div>
+            <ul className="mt-4 grid gap-2 md:grid-cols-2">
               <li className="rounded-lg border border-[var(--line)] px-3 py-3 text-sm text-[var(--muted)]">
                 Mutual NDA (emailed on request)
               </li>
@@ -119,32 +120,40 @@ export default function DataRoomPage() {
           </article>
 
           <div>
-                      <div className="eyebrow mb-2">Request access</div>
-                      <h2 className="display mb-4 text-3xl">Get the pack / NDA</h2>
-                      <div className="grid gap-8 lg:grid-cols-[1.15fr_.85fr]">
-                        <InvestorForm defaultTier1 defaultNda />
-                        <div className="card h-fit p-6">
-                          <h3 className="display text-xl">What happens</h3>
-                          <ol className="muted mt-4 list-decimal space-y-3 pl-5 leading-7">
-                            <li>CRM lead created with investor tags and score</li>
-                            <li>Tier 0–1 PDFs emailed to you (if selected)</li>
-                            <li>Mutual NDA emailed if data-room access requested</li>
-                            <li>
-                              Raise team follows up and opens Tier 2 after countersignature
-                            </li>
-                          </ol>
-                          <Link href="/invest/apply" className="btn btn-secondary mt-6">
-                            Full apply page
-                          </Link>
-                        </div>
-                      </div>
-                    </div>
+            <div className="eyebrow mb-2">Request access</div>
+            <h2 className="display mb-4 text-3xl">Get the pack / NDA</h2>
+            <div className="grid gap-8 lg:grid-cols-[1.15fr_.85fr]">
+              <InvestorForm defaultTier1 defaultNda />
+              <div className="card h-fit p-6">
+                <h3 className="display text-xl">What happens</h3>
+                <ol className="muted mt-4 list-decimal space-y-3 pl-5 leading-7">
+                  <li>CRM lead created with investor tags and score</li>
+                  <li>Tier 0–1 PDFs emailed to you (if selected)</li>
+                  <li>Mutual NDA emailed if data-room access requested</li>
+                  <li>
+                    Raise team follows up and opens Tier 2 after countersignature
+                  </li>
+                </ol>
+                <a
+                  href={site.ndaFormUrl}
+                  className="btn btn-primary mt-6"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  NDA / data-room form
+                </a>
+                <Link href="/invest/apply" className="btn btn-secondary mt-3">
+                  Full apply page
+                </Link>
+              </div>
+            </div>
+          </div>
 
-                    <div className="card p-6">
-                      <InvestorDisclaimer />
-                    </div>
-                  </div>
-                </section>
-              </>
-            );
-          }
+          <div className="card p-6">
+            <InvestorDisclaimer />
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}
