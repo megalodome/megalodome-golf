@@ -17,7 +17,7 @@ So the credentials path is correct enough to hit Vista’s real login API, but *
 
 1. Open https://vistasocial.com/login  
 2. Sign in as Nick (password login or **Google** if that’s how the account was created).  
-3. If password fails, use **Forgot password** or **Sign in with Google** for `badyal.nick@gmail.com`.
+3. If password fails, use **Forgot password** or **Sign in with Google** for the workspace Gmail.
 
 ### A) Connect profiles
 Settings / Channels → connect:
