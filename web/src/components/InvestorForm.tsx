@@ -2,6 +2,7 @@
 
 import { FormEvent, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import posthog from "posthog-js";
 
 function readUtms() {
   if (typeof window === "undefined") return {};
@@ -62,6 +63,13 @@ export function InvestorForm({
       const json = await res.json().catch(() => ({}));
       if (!res.ok) throw new Error(json.error || "Failed to submit inquiry");
       setStatus("ok");
+      posthog.capture("investor_inquiry_submitted", {
+        investor_type: String(data.investorType || ""),
+        check_size: String(data.checkSize || ""),
+        timeline: String(data.timeline || ""),
+        requested_tier1: data.requestTier1 === "true",
+        requested_nda: data.requestNda === "true",
+      });
       form.reset();
       router.push("/invest/thank-you");
     } catch (err) {

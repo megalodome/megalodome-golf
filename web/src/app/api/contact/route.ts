@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { insertSupabaseLead, sendLeadEmail } from "@/lib/leads";
+import { getPostHogClient } from "@/lib/posthog-server";
 import {
   buildInvestorBackground,
   createSuiteDashContact,
@@ -167,6 +168,21 @@ export async function POST(req: Request) {
         tags: isNewsletter ? ["newsletter"] : undefined,
       },
     });
+
+    const distinctId = req.headers.get("x-posthog-distinct-id") || email;
+    const posthog = getPostHogClient();
+    posthog.capture({
+      distinctId,
+      event: "server_contact_submitted",
+      properties: {
+        interest,
+        is_newsletter: isNewsletter,
+        is_investor: isInvestor,
+        is_media: isMedia,
+        is_partner: isPartner,
+      },
+    });
+    await posthog.shutdown();
 
     await sendLeadEmail({
       subject: isNewsletter
