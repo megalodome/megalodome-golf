@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { getPostHogClient } from "@/lib/posthog-server";
 import {
   NDA_PDF,
   TIER0_PDFS,
@@ -233,6 +234,26 @@ export async function POST(req: Request) {
         userAgent: req.headers.get("user-agent"),
       },
     });
+
+    // PostHog server-side event
+    const distinctId = req.headers.get("x-posthog-distinct-id") || email;
+    const posthog = getPostHogClient();
+    posthog.capture({
+      distinctId,
+      event: "server_investor_inquiry_submitted",
+      properties: {
+        lead_heat: heat,
+        investor_type: investorType || null,
+        check_size: checkSize || null,
+        timeline: timeline || null,
+        requested_tier1: requestTier1,
+        requested_nda: requestNda,
+        utm_source: body.utm_source || null,
+        utm_medium: body.utm_medium || null,
+        utm_campaign: body.utm_campaign || null,
+      },
+    });
+    await posthog.shutdown();
 
     // 3) Email pack to investor
     const attach = [...TIER0_PDFS];

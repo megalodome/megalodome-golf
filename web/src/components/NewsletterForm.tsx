@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useEffect, useState } from "react";
+import posthog from "posthog-js";
 
 /** Compact footer / inline newsletter capture → /api/contact interest=newsletter */
 export function NewsletterForm({ className = "" }: { className?: string }) {
@@ -36,6 +37,7 @@ export function NewsletterForm({ className = "" }: { className?: string }) {
       if (!res.ok) throw new Error(json.error || "Signup failed");
       setStatus("ok");
       setMessage("You're on the list — thank you.");
+      posthog.capture("newsletter_signup");
       form.reset();
       setStartedAt(Date.now());
     } catch (err) {

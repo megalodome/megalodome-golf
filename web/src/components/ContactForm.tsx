@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useEffect, useMemo, useState } from "react";
+import posthog from "posthog-js";
 import { useSearchParams } from "next/navigation";
 
 const ALL_INTERESTS = [
@@ -72,6 +73,7 @@ export function ContactForm({
       }
       setStatus("ok");
       setMessage("Thanks — your message was sent. We'll be in touch soon.");
+      posthog.capture("contact_form_submitted", { interest });
       form.reset();
       setInterest(defaultInterest);
       setStartedAt(Date.now());
